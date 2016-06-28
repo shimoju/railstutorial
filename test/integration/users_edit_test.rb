@@ -35,7 +35,9 @@ class UsersEditTest < ActionDispatch::IntegrationTest
 
   test "successful edit with friendly forwarding" do
     get edit_user_path(@user)
+    assert_equal edit_user_url(@user), session[:forwarding_url] #セッションに直前にいたURLが保存されているか確認
     log_in_as(@user)
+    assert_nil session[:forwarding_url] #ログイン後はsessionに保存されていたURLは削除される
     assert_redirected_to edit_user_path(@user)
     name = "Foo Bar"
     email = "foo@bar.com"
