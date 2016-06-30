@@ -70,7 +70,7 @@ Rails.application.configure do
    ActionMailer::Base.smtp_settings = {
     :address => 'smtp.lolipop.jp',
     :port => '587',
-    :authentication => :plaon,
+    :authentication => :plain,
     :user_name => ENV['LOLIPOP_USERNAME'],
     :password => ENV['LOLIPOP_PASSWORD'],
     :domain => 'ogidow.mongolian.jp',
