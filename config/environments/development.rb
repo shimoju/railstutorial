@@ -19,6 +19,22 @@ Rails.application.configure do
   host = 'localhots:3000'
   config.action_mailer.default_url_options = { host: host, protocol: 'https' }
 
+  #config.action_mailer.raise_delivery_errors = true
+  #config.action_mailer.delivery_method = :smpt
+  #host = 'localhost:3000'
+  #config.action_mailer.default_url_options = {host: host}
+
+  #ActionMailer::Base.smtp_settings = {
+  #  :address => 'smtp.lolipop.jp',
+  #  :port => '123456',
+  #  :authentication => :plain,
+  #  :user_name => 'info@ogidow.mongolian.jp',
+  #  :password => 'iz9QnFAp',
+  #  :domain => 'ogidow.mongolian.jp',
+  #  :enable_starttls_auto => true
+  #}
+  
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
