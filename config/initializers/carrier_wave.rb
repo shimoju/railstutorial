@@ -9,6 +9,6 @@ if Rails.env.production?
 
     config.asset_host = ENV['BAYT_ASSET_URL']
     config.aws_bucket = 'sandbox'
-    config.aws_acl = 'publick-read'
+    config.aws_acl = 'public-read'
   end
 end
