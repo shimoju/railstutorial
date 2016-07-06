@@ -4,7 +4,7 @@ class UsersShowTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:michael)
     @active_user = users(:archer)
-    @non_active_user = users(:malory)
+    @non_active_user = users(:ogido)
   end
 
   test"show as active user" do
