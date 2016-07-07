@@ -20,8 +20,8 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     end
 
     #統計値が正しいか
-    assert_match @user.following.count.to_s, response.body
-    assert_match @user.followers.count.to_s, response.body
+    assert_select "strong#following", @user.following.count.to_s
+    assert_select "strong#followers", @user.followers.count.to_s
 
     assert_select "a[href=?]", following_user_path(@user)
     assert_select "a[href=?]", followers_user_path(@user)
