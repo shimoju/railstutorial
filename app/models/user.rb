@@ -82,6 +82,25 @@ class User < ActiveRecord::Base
     following.include?(other_user)
   end
 
+  def generate_jwt
+    key = ENV['SECRET_KEY']
+    header = Jbuilder.encode do |json|
+      json.type "JWT"
+      json.alg "HS256"
+    end
+
+    payload = Jbuilder.encode do |json|
+      json.iss "young-oasis-99979.herokuapp.com"
+      json.exp (Time.zone.now + 3600).to_i # 有効期限は1時間後
+      json.user_id id
+    end
+
+    jwt = Base64.encode64(header) + "." + Base64.encode64(payload)
+
+    signature = OpenSSL::HMAC.hexdigest("sha256", key, jwt)
+    jwt += "." + signature
+  end
+
   private
 
   def downcase_email
