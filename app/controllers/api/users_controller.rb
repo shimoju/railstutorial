@@ -1,6 +1,6 @@
 
-include UsersHelper
 class Api::UsersController < ApplicationController
+  include ::UsersHelper
   def index
     @users = User.where(activated: true).paginate(page: params[:page])
   end
