@@ -1,6 +1,6 @@
 
 class Api::UsersController < ApplicationController
-  include ::UsersHelper
+
   def index
     @users = User.where(activated: true).paginate(page: params[:page])
   end
@@ -17,7 +17,11 @@ class Api::UsersController < ApplicationController
       @user.send_activation_email
       render status: :created
     else
-      render status: :unprocessable_entity
+      build_json = Jbuilder.encode do |json|
+        json.message "Validation Failed"
+        json.errors @user.errors.messages
+      end
+      render json: build_json, status: :unprocessable_entity
     end
   end
 

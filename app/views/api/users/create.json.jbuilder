@@ -1,6 +1,7 @@
-unless @user.errors.messages.empty?
-  json.message "Created"
-else
-  json.message "Validation Failed"
-  json.errors @user.errors.messages
+json.message "Created"
+json.user do
+  json.id @user.id
+  json.name @user.name
+  json.activated @user.activated
+  json.icon_url gravatar_for(@user, url: true)
 end
