@@ -37,7 +37,7 @@ class Api::UsersControllerTest < ActionController::TestCase
                             password_confirmation: "bar"
                           }
     end
-    assert_response :internal_server_error
+    assert_response :unprocessable_entity
   end
 
   test "ユーザのサインアップ(成功)" do

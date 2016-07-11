@@ -17,7 +17,7 @@ class Api::UsersController < ApplicationController
       @user.send_activation_email
       render status: 201
     else
-      render status: 500
+      render status: 422
     end
   end
 
