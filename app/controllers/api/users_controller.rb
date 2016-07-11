@@ -41,7 +41,6 @@ class Api::UsersController < ApplicationController
       build_json = Jbuilder.encode do |json|
         json.message "Validation Failed"
         json.errors user.errors.messages
-
       end
       render json: build_json, status: 500
     end
@@ -60,7 +59,7 @@ class Api::UsersController < ApplicationController
   end
 
   private
-  def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
-  end
+    def user_params
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
 end
