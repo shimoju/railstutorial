@@ -15,9 +15,9 @@ class Api::UsersController < ApplicationController
 
     if @user.save
       @user.send_activation_email
-      render status: 201
+      render status: :created
     else
-      render status: 422
+      render status: :unprocessable_entity
     end
   end
 
