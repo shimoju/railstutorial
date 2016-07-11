@@ -7,7 +7,7 @@ class Api::UsersControllerTest < ActionController::TestCase
   end
 
   test "user一覧の取得" do
-    get :index
+    get :index, format: :json
 
     params = JSON.parse(response.body, symbolize_names: true)
     first_page_users = User.where(activated: true).paginate(page: 1)
@@ -19,7 +19,7 @@ class Api::UsersControllerTest < ActionController::TestCase
   end
 
   test "user情報の取得" do
-    get :show, id: @user
+    get :show, format: :json, id: @user
     assert_response :success
 
     params = JSON.parse(response.body, symbolize_names: true) 
@@ -30,7 +30,7 @@ class Api::UsersControllerTest < ActionController::TestCase
 
   test "ユーザのサインアップ(失敗)" do
     assert_no_difference "User.count" do
-      post :create, user: {
+      post :create, format: :json, user: {
                             name: "",
                             email: "user@invalid",
                             password: "foo",
@@ -42,7 +42,7 @@ class Api::UsersControllerTest < ActionController::TestCase
 
   test "ユーザのサインアップ(成功)" do
     assert_difference "User.count", 1 do
-      post :create, user: {
+      post :create, format: :json, user: {
                             name: "Example User",
                             email: "user@example.com",
                             password: "password",

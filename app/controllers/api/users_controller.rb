@@ -2,47 +2,22 @@
 include UsersHelper
 class Api::UsersController < ApplicationController
   def index
-    users = User.where(activated: true).paginate(page: params[:page])
-    build_json = Jbuilder.encode do |json|
-      json.users users
-    end
-    render json: build_json
+    @users = User.where(activated: true).paginate(page: params[:page])
   end
 
   def show
-    user = User.find(params[:id])
-    page = params[:page] || 1
-    microposts = user.microposts.paginate(page: params[:page])
-    build_json = Jbuilder.encode do |json|
-      json.user do
-        json.id user.id
-        json.name user.name
-        json.email user.email
-        json.activated user.activated
-        json.icon_url gravatar_for(user, url: true)
-        json.microposts microposts
-      end
-    end
-
-    render json: build_json
+    @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
 
   def create
-    user = User.new(user_params)
-    message = ""
+    @user = User.new(user_params)
 
-    if user.save
-      user.send_activation_email
-      build_json = Jbuilder.encode do |json|
-        json.message "Created"
-      end
-      render json: build_json, status: 201
+    if @user.save
+      @user.send_activation_email
+      render status: 201
     else
-      build_json = Jbuilder.encode do |json|
-        json.message "Validation Failed"
-        json.errors user.errors.messages
-      end
-      render json: build_json, status: 500
+      render status: 500
     end
   end
 
