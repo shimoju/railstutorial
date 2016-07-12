@@ -88,10 +88,11 @@ class User < ActiveRecord::Base
     JWT.encode(payload, key, 'HS256')
   end
 
-  def User.decode_jwt(token)
+  def User.api_authenticated?(token)
    key = Rails.application.secrets[:secret_key_base] 
     begin
       decoded_token = JWT.decode(token, key, true, {algorithm: 'HS256'}) 
+      true
     rescue JWT::ExpiredSignature
       false
     end

@@ -109,4 +109,10 @@ class UserTest < ActiveSupport::TestCase
       assert_not michael.feed.include?(post_unfollowed)
     end
   end
+
+  test "should success with right token" do
+    user = users(:michael)
+    token = user.generate_jwt
+    assert User.api_authenticated?(token)
+  end
 end

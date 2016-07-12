@@ -6,11 +6,9 @@ class Api::UsersControllerTest < ActionController::TestCase
     ActionMailer::Base.deliveries.clear
   end
 
-  test "user一覧の取得" do
+  test "user一覧の取得(認証)" do
     get :index, format: :json
-
     params = JSON.parse(response.body, symbolize_names: true)
-    assert_not_nil params[:users]
 
     first_page_users = User.where(activated: true).paginate(page: 1)
     users_names = params[:users].map{|user| user[:name]}
