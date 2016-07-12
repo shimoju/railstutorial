@@ -3,8 +3,7 @@ class Api::SessionsController < ApplicationController
     @user = User.find_by(email: params[:user][:email].downcase)
     if @user && @user.authenticate(params[:user][:password])
       if @user.activated?
-        generate_jwt(@user.id)
-
+        render status: :success
       else
         build_json = Jbuilder.encode do |json|
           json.message "Account Not Activated"
