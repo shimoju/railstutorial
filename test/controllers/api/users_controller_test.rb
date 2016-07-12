@@ -10,6 +10,8 @@ class Api::UsersControllerTest < ActionController::TestCase
     get :index, format: :json
 
     params = JSON.parse(response.body, symbolize_names: true)
+    assert_not_nil params[:users]
+
     first_page_users = User.where(activated: true).paginate(page: 1)
     users_names = params[:users].map{|user| user[:name]}
 

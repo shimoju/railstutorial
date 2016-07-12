@@ -83,32 +83,28 @@ class User < ActiveRecord::Base
   end
 
   def generate_jwt
-    key = ENV['SECRET_KEY']
-    header = Jbuilder.encode do |json|
-      json.type "JWT"
-      json.alg "HS256"
+    key = Rails.application.secrets[:secret_key_base]
+    payload = {user_id: id, exp: Time.zone.now.to_i + 3600, iss: "young-oasis-99979.herokuapp.com"}
+    JWT.encode(payload, key, 'HS256')
+  end
+
+  def User.decode_jwt(token)
+   key = Rails.application.secrets[:secret_key_base] 
+    begin
+      decoded_token = JWT.decode(token, key, true, {algorithm: 'HS256'}) 
+    rescue JWT::ExpiredSignature
+      false
     end
-
-    payload = Jbuilder.encode do |json|
-      json.iss "young-oasis-99979.herokuapp.com"
-      json.exp (Time.zone.now + 3600).to_i # 有効期限は1時間後
-      json.user_id id
-    end
-
-    jwt = Base64.encode64(header) + "." + Base64.encode64(payload)
-
-    signature = OpenSSL::HMAC.hexdigest("sha256", key, jwt)
-    jwt += "." + signature
   end
 
   private
 
-  def downcase_email
-    self.email = email.downcase
-  end
+    def downcase_email
+      self.email = email.downcase
+    end
 
-  def create_activation_digest
-    self.activation_token = User.new_token
-    self.activation_digest = User.digest(activation_token)
-  end
+    def create_activation_digest
+      self.activation_token = User.new_token
+      self.activation_digest = User.digest(activation_token)
+    end
 end
