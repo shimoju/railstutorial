@@ -18,7 +18,7 @@ class Api::SessionsControllerTest < ActionController::TestCase
   test "non_activeなユーザのjwtトークンを取得" do
     non_active_user = users(:ogido)
 
-    post :create, format: :json, user: {email: non_active_user.email, password: 'pasword'} 
+    post :create, format: :json, user: {email: non_active_user.email, password: 'password'} 
     assert_response :unprocessable_entity
   end
 
