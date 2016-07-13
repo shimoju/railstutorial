@@ -113,6 +113,6 @@ class UserTest < ActiveSupport::TestCase
   test "should success with right token" do
     user = users(:michael)
     token = user.generate_jwt
-    assert User.api_authenticated?(token)
+    assert User.decode_jwt(token)
   end
 end

@@ -51,6 +51,7 @@ class Api::UsersController < ApplicationController
       auth_header = request.authorization
       render nothing: true, status: :unauthorized and return if auth_header.nil?
       token = auth_header.split(" ").last
-      render nothing: true,  status: :unauthorized and return unless User.api_authenticated?(token)
+      decoded_token = User.decode_jwt(token)
+      render nothing: true,  status: :unauthorized and return unless decoded_token
     end
 end
