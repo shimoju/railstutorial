@@ -1,6 +1,7 @@
 
 class Api::UsersController < ApplicationController
 #  before_action :approve, only: [:index, :edit, :update, :destroy, :following, :followers]
+  before_action :approve, only: [:index, :show]
 
   def index
     @users = User.where(activated: true).paginate(page: params[:page])
@@ -9,6 +10,8 @@ class Api::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
+
+    render nothing: true, status: :forbidden unless @user.activated?
   end
 
   def create
@@ -45,8 +48,9 @@ class Api::UsersController < ApplicationController
     end
 
     def approve
-      token = request.authorization
-      render status: :unauthorized and return if token.nil?
-      render status: :unauthorized and return unless User.decode_jwt(token)
+      auth_header = request.authorization
+      render nothing: true, status: :unauthorized and return if auth_header.nil?
+      token = auth_header.split(" ").last
+      render nothing: true,  status: :unauthorized and return unless User.api_authenticated?(token)
     end
 end

@@ -6,26 +6,14 @@ class Api::UsersControllerTest < ActionController::TestCase
     ActionMailer::Base.deliveries.clear
   end
 
-  test "user一覧の取得(認証)" do
+  test "user一覧取得(認証なし)" do
     get :index, format: :json
-    params = JSON.parse(response.body, symbolize_names: true)
-
-    first_page_users = User.where(activated: true).paginate(page: 1)
-    users_names = params[:users].map{|user| user[:name]}
-
-    first_page_users.each do |user|
-      assert users_names.include?(user[:name])
-    end
+    assert_response :unauthorized
   end
 
-  test "user情報の取得" do
+  test "user情報の取得(認証なし)" do
     get :show, format: :json, id: @user
-    assert_response :success
-
-    params = JSON.parse(response.body, symbolize_names: true) 
-    assert_not_nil params[:user]
-    assert_equal @user[:name], params[:user][:name]
-    assert_equal @user[:email], params[:user][:email]
+    assert_response :unauthorized
   end
 
   test "ユーザのサインアップ(失敗)" do

@@ -13,7 +13,7 @@ class ActiveSupport::TestCase
     !session[:user_id].nil?
   end
 
-  def log_in_as(user, options ={})
+  def log_in_as(user, options = {})
     password = options[:password] || 'password'
     remember_me = options[:remember_me] || '1'
     if integration_test?
@@ -23,10 +23,14 @@ class ActiveSupport::TestCase
     end
   end
 
-  def auth(user)
-   post :create, controller: 'api/sessions', format: :json, user: {email: user.email, password: user.password}
+  def auth_as(user, password: "password")
+   post api_auth_path, format: :json, user: {email: user.email, password: password}
    params = JSON.parse(response.body, symbolize_names: true)
-   p params
+   params[:token]
+  end
+  
+  def api_params
+    JSON.parse(response.body, symbolize_names: true)
   end
 
   private
