@@ -3,7 +3,7 @@ require 'test_helper'
 class ApiUsersIndexTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:michael)
-    token = auth_as(@user)
+    token = @user.generate_jwt
     @headers = {"Authorization" => "Bearer #{token}"}
   end
 

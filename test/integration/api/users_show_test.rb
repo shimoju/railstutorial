@@ -6,7 +6,7 @@ class Api::UsersShowTest < ActionDispatch::IntegrationTest
     @active_user = users(:archer)
     @non_active_user = users(:ogido)
     
-    token = auth_as(@user)
+    token = @user.generate_jwt
     @headers = {"Authorization" => "Bearer #{token}"}
   end
 

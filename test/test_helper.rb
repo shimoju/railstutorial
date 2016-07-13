@@ -22,13 +22,7 @@ class ActiveSupport::TestCase
       session[:user_id] = user.id
     end
   end
-
-  def auth_as(user, password: "password")
-   post api_auth_path, format: :json, user: {email: user.email, password: password}
-   params = JSON.parse(response.body, symbolize_names: true)
-   params[:token]
-  end
-  
+ 
   def api_params
     JSON.parse(response.body, symbolize_names: true)
   end
