@@ -1,7 +1,6 @@
 
 class Api::UsersController < ApplicationController
-#  before_action :approve, only: [:index, :edit, :update, :destroy, :following, :followers]
-  before_action :approve, only: [:index, :show]
+  before_action :approve, only: [:index, :edit, :update, :destroy, :following, :followers]
 
   def index
     @users = User.where(activated: true).paginate(page: params[:page])
