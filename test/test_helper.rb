@@ -23,7 +23,7 @@ class ActiveSupport::TestCase
     end
   end
  
-  def api_params
+  def response_json
     JSON.parse(response.body, symbolize_names: true)
   end
 

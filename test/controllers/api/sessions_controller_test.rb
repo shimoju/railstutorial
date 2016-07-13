@@ -4,7 +4,7 @@ class Api::SessionsControllerTest < ActionController::TestCase
   test "jwtトークンの取得" do
     user = users(:michael)
     post :create, format: :json, user: {email: user.email, password: 'password'}
-    params = api_params
+    params = response_json
 
     assert_response :success
     assert_not_nil params[:token]

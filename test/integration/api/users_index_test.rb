@@ -11,7 +11,7 @@ class ApiUsersIndexTest < ActionDispatch::IntegrationTest
     get api_users_path, {}, @headers
     assert_response :success
 
-    params = api_params
+    params = response_json
     users_names = params[:users].map{|user| user[:name]}
 
     first_page_users = User.where(activated: true).paginate(page: 1)

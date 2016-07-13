@@ -14,7 +14,7 @@ class Api::UsersShowTest < ActionDispatch::IntegrationTest
     get api_user_path(@active_user), {}, @headers
     assert_response :success
 
-    params = api_params
+    params = response_json
     assert_not_nil params[:user]
     assert_equal @active_user[:name], params[:user][:name]
     assert_equal @active_user[:email], params[:user][:email]
