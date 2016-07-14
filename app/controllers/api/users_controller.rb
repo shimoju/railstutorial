@@ -1,6 +1,8 @@
 
 class Api::UsersController < ApplicationController
-  before_action :approve, only: [:index, :show, :edit, :update, :destroy, :following, :followers]
+  before_action :approve, only: [:index, :show, :update, :destroy, :following, :followers]
+  before_action :current_user, only: [:update]
+  before_action :admin_user, only: [:destroy]
 
   def index
     @users = User.where(activated: true).paginate(page: params[:page])
@@ -29,7 +31,12 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      render status: :ok
+    else
+      render nothing: true, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -56,6 +63,16 @@ class Api::UsersController < ApplicationController
       render nothing: true, status: :unauthorized and return if auth_header.nil?
       token = auth_header.split(" ").last
       decoded_token = User.decode_jwt(token)
+       @decoded_user_info = decoded_token.first
       render nothing: true,  status: :unauthorized and return unless decoded_token
+    end
+
+    def current_user
+      render nothing: true, status: :forbidden and return unless params[:id].to_i == @decoded_user_info["user_id"]
+    end
+
+    def admin_user
+      user = User.find(@decoded_user_info["user_id"])
+      render nothing: true, status: :forbidden and return unless user.admin?
     end
 end

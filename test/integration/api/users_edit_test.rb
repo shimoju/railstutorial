@@ -10,7 +10,7 @@ class Api::UsersEditTest < ActionDispatch::IntegrationTest
   test "正しくないパラメータで更新" do
     patch api_user_path(@user), { user: {
                                    name: "",
-                                   email: "foo",
+                                   email: "foo@invalid",
                                    password: "foo",
                                    password_confimation: "bar"
                                  }
@@ -25,8 +25,8 @@ class Api::UsersEditTest < ActionDispatch::IntegrationTest
                                    name: name,
                                    email: email,
                                    password: "",
-                                   password_confimation: ""    
-                                   }
+                                   password_confirmation: ""
+                                  }
                            }, @headers
     assert_response :success
 
