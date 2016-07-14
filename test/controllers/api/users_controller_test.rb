@@ -40,4 +40,11 @@ class Api::UsersControllerTest < ActionController::TestCase
     assert_response :created
     assert_equal 1, ActionMailer::Base.deliveries.size
   end
+
+  test "ユーザの削除(認証なし)" do
+    assert_no_difference "User.count" do
+      delete :destroy, format: :json, id: @user.id
+    end
+    assert_response :unauthorized
+  end
 end
