@@ -1,6 +1,6 @@
 
-class Api::UsersController < ApplicationController
-  before_action :approve, only: [:index, :show, :update, :destroy, :following, :followers]
+class Api::UsersController < Api::ApplicationController
+  before_action :check_auth_token, only: [:index, :show, :update, :destroy, :following, :followers]
   before_action :correct_user, only: :update
   before_action :admin_user, only: :destroy
 
@@ -58,21 +58,8 @@ class Api::UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 
-    def approve
-      auth_header = request.authorization
-      render nothing: true, status: :unauthorized and return if auth_header.nil?
-      token = auth_header.split(" ").last
-      decoded_token = User.decode_jwt(token)
-       @decoded_user_info = decoded_token.first
-      render nothing: true,  status: :unauthorized and return unless decoded_token
-    end
-
     def correct_user
-      render nothing: true, status: :forbidden and return unless params[:id].to_i == @decoded_user_info["user_id"]
-    end
-
-    def admin_user
-      user = User.find(@decoded_user_info["user_id"])
-      render nothing: true, status: :forbidden and return unless user.admin?
+      user = User.find(params[:id])
+      render nothing: true, status: :forbidden and return unless user == current_user
     end
 end

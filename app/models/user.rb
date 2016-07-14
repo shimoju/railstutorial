@@ -93,7 +93,7 @@ class User < ActiveRecord::Base
     begin
       decoded_token = JWT.decode(token, key, true, {algorithm: 'HS256'}) 
     rescue JWT::ExpiredSignature
-      return false
+      return nil
     end
   end
 
