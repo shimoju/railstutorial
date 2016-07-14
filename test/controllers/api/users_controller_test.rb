@@ -47,4 +47,15 @@ class Api::UsersControllerTest < ActionController::TestCase
     end
     assert_response :unauthorized
   end
+
+  test "ユーザのアップデート(認証なし)" do
+    patch :update, format: :json, id: @user.id, 
+                                  user: {
+                                          name: "ogidow",
+                                          email: "test@test.com",
+                                          password: "",
+                                          password_confirmation: ""
+                                        }
+    assert_response :unauthorized
+  end
 end
