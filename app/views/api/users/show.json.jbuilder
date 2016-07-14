@@ -1,9 +1,8 @@
 json.user do
-  json.id @user.id
-  json.name @user.name
-  json.email @user.email
-  json.activated @user.activated
+  json.extract! @user, :id, :name, :email, :activated
   json.icon_url gravatar_for(@user, url: true)
-  json.microposts @microposts
+  json.microposts do
+    json.array! @microposts, :content, :picture, :created_at 
+  end
 end
 

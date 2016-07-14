@@ -31,5 +31,6 @@ Rails.application.routes.draw do
   #json api
   namespace :api, {format: 'json'} do
     resources :users
+    post 'auth' => 'sessions#create'
   end
 end
