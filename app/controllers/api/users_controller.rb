@@ -1,8 +1,8 @@
 
 class Api::UsersController < ApplicationController
   before_action :approve, only: [:index, :show, :update, :destroy, :following, :followers]
-  before_action :current_user, only: [:update]
-  before_action :admin_user, only: [:destroy]
+  before_action :correct_user, only: :update
+  before_action :admin_user, only: :destroy
 
   def index
     @users = User.where(activated: true).paginate(page: params[:page])
@@ -67,7 +67,7 @@ class Api::UsersController < ApplicationController
       render nothing: true,  status: :unauthorized and return unless decoded_token
     end
 
-    def current_user
+    def correct_user
       render nothing: true, status: :forbidden and return unless params[:id].to_i == @decoded_user_info["user_id"]
     end
 
