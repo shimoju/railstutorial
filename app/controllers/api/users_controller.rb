@@ -1,6 +1,8 @@
 
-class Api::UsersController < ApplicationController
-  before_action :approve, only: [:index, :show, :edit, :update, :destroy, :following, :followers]
+class Api::UsersController < Api::ApplicationController
+  before_action :check_auth_token, only: [:index, :show, :update, :destroy, :following, :followers]
+  before_action :correct_user, only: :update
+  before_action :admin_user, only: :destroy
 
   def index
     @users = User.where(activated: true).paginate(page: params[:page])
@@ -29,10 +31,20 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      render status: :ok
+    else
+      render nothing: true, status: :unprocessable_entity
+    end
   end
 
   def destroy
+    user = User.find_by(id: params[:id])
+    render nothing: true, status: :not_found and return if user.nil? 
+
+    user.destroy
+    render nothing: true, status: :ok
   end
 
   def following
@@ -46,11 +58,8 @@ class Api::UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 
-    def approve
-      auth_header = request.authorization
-      render nothing: true, status: :unauthorized and return if auth_header.nil?
-      token = auth_header.split(" ").last
-      decoded_token = User.decode_jwt(token)
-      render nothing: true,  status: :unauthorized and return unless decoded_token
+    def correct_user
+      user = User.find(params[:id])
+      render nothing: true, status: :forbidden and return unless user == current_user
     end
 end
