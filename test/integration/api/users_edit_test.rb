@@ -30,8 +30,9 @@ class Api::UsersEditTest < ActionDispatch::IntegrationTest
                            }, @headers
     assert_response :success
 
-    @user.reload
-    assert_equal @user.name, name
-    assert_equal @user.email, email
+    params = response_json
+
+    assert_equal params[:user][:name], name
+    assert_equal params[:user][:email], email
   end
 end
