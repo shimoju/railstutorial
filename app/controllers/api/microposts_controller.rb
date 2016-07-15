@@ -17,8 +17,6 @@ class Api::MicropostsController < Api::ApplicationController
 
   def destroy
     micropost = Micropost.find_by(id: params[:id])
-    render notshing: true, status: :not_found and return if micropost.nil?
-
     micropost.destroy
     render nothing: true, status: :ok
   end
