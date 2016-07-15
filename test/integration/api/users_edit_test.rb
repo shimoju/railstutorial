@@ -4,7 +4,7 @@ class Api::UsersEditTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:michael)
     token = @user.generate_jwt
-    @headers = {"Authorization" => token}
+    @headers = {"Authorization" => "Bearer #{token}"}
   end
 
   test "正しくないパラメータで更新" do
