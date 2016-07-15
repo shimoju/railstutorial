@@ -25,7 +25,7 @@ class Api::MicropostsPostTest < ActionDispatch::IntegrationTest
 
   test "空のマイクロポストの投稿(認証あり)" do
     assert_no_difference "Micropost.count" do
-      post api_microposts_path, {micropost: ""}, @headers
+      post api_microposts_path, {micropost: {content: ""}}, @headers
     end
     assert_response :unprocessable_entity
   end
