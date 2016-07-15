@@ -32,5 +32,6 @@ Rails.application.routes.draw do
   namespace :api, {format: 'json'} do
     resources :users
     post 'auth' => 'sessions#create'
+    resources :microposts, only: [:create, :destroy]
   end
 end

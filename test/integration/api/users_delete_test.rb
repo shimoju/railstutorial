@@ -4,7 +4,7 @@ class Api::UsersDeleteTest < ActionDispatch::IntegrationTest
   def setup
     @admin_user = users(:michael)
     admin_token = @admin_user.generate_jwt
-    @admin_headers = {"Authorization" => admin_token}
+    @admin_headers = {"Authorization" => "Bearer #{admin_token}"}
 
     @non_admin_user = users(:lana)
     non_admin_token = @non_admin_user.generate_jwt
