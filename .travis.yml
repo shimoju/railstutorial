@@ -12,8 +12,7 @@ cache: bundler
 
 berire_script:
   - cp config/database.yml.travis config/database.yml
-  - bundle exec rake db:create
-  - bundle exec rake db:migrate
+  - bin/rake db:setup
 
 script:
   - bundle exec rake test
