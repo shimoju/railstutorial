@@ -4,14 +4,14 @@ rvm:
   - 2.3.1
 
 services:
-  - postgresql
+  - mysql
 
 bundler_args: "--without development --deployment"
 
 cache: bundler
 
 berire_script:
-  - cp config/database.yml.travis config/database.yml 
+  - cp config/database.yml.travis config/database.yml
   - bundle exec rake db:create
   - bundle exec rake db:migrate
 
