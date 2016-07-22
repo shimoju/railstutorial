@@ -13,6 +13,3 @@ cache: bundler
 before_script:
   - cp config/database.yml.travis config/database.yml
   - bin/rake db:setup
-
-script:
-  - bundle exec rake test
