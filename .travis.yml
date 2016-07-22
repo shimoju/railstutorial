@@ -10,7 +10,7 @@ bundler_args: "--without development --deployment"
 
 cache: bundler
 
-berire_script:
+before_script:
   - cp config/database.yml.travis config/database.yml
   - bin/rake db:setup
 
