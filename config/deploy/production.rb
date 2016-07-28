@@ -63,7 +63,7 @@
 server 'localhost',
   user: 'rails',
   port: '2222',
-  roles: %w{web db},
+  roles: %w{web app db},
   ssh_options: {
     keys: %w(~/.ssh/id_rsa),
     forward_agent: false,
