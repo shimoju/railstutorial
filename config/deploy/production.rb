@@ -59,3 +59,13 @@
 #     auth_methods: %w(publickey password)
 #     # password: 'please use keys'
 #   }
+
+server 'localhost',
+  user: 'rails',
+  port: '2222',
+  roles: %w{web db},
+  ssh_options: {
+    keys: %w(~/.ssh/id_rsa),
+    forward_agent: false,
+    auth_methods: %w(publickey)
+  }
