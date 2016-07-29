@@ -61,7 +61,7 @@
 #   }
 
 server 'localhost',
-  user: 'rails',
+  user: 'deploy',
   port: '2222',
   roles: %w{web app db},
   ssh_options: {
