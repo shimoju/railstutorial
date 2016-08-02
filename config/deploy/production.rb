@@ -10,8 +10,15 @@
 server 'localhost',
   user: 'deploy',
   roles: %w{app db web},
-  port: '2222'
+  port: '2222',
+  ssh_options: {
+    keys: %w(~/.ssh/deploy_key),
+    forward_agent: false,
+    auth_methods: %w(publickey)
+  }
 
+set :rails_env, 'production'
+set :branch, 'master'
 
 # role-based syntax
 # ==================
