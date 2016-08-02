@@ -12,7 +12,6 @@ server 'localhost',
   roles: %w{app db web},
   port: '2222',
   ssh_options: {
-    user: 'root',
     keys: %w(~/.ssh/deploy_key),
     forward_agent: false,
     auth_methods: %w(publickey)
