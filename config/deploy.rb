@@ -39,10 +39,10 @@ namespace :deploy do
 
   namespace :db do
     desc 'Create database'
-    task :create do
-      on roles(:db) do |host|
-        with rails_env: fetch(:rails_env) do
-          within current_path do
+    before :migrate, :create do
+      on fetch(:migration_servers) do
+        within release_path do
+          with rails_env: fetch(:rails_env) do
             execute :bundle, :exec, :rake, 'db:create'
           end
         end

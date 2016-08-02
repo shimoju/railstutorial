@@ -12,14 +12,14 @@ server 'localhost',
   roles: %w{app db web},
   port: '2222',
   ssh_options: {
-    user: 'rails',
+    user: 'root',
     keys: %w(~/.ssh/deploy_key),
     forward_agent: false,
     auth_methods: %w(publickey)
   }
 
 set :rails_env, 'production'
-set :branch, 'create-cap-setting'
+set :branch, 'master'
 
 # role-based syntax
 # ==================
