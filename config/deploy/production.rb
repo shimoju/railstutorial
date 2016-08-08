@@ -10,11 +10,11 @@
 server 'localhost',
   user: 'deploy',
   roles: %w{app db web},
-  port: '2222',
   ssh_options: {
     keys: %w(~/.ssh/deploy_key),
-    forward_agent: false,
-    auth_methods: %w(publickey)
+    forward_agent: true,
+    auth_methods: %w(publickey),
+    proxy: Net::SSH::Proxy::Command.new('ssh -i ~/.ssh/bastion_key bastion@127.0.0.1 -p 2222 nc -w 2 %h %p')
   }
 
 set :rails_env, 'production'
