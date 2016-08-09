@@ -14,7 +14,7 @@ server 'all',
     keys: %w(~/.ssh/deploy_key),
     forward_agent: true,
     auth_methods: %w(publickey),
-    proxy: Net::SSH::Proxy::Command.new('ssh -i ~/.ssh/bastion_key bastion@127.0.0.1 -p 2222 nc -w 2 %h %p')
+    proxy: Net::SSH::Proxy::Command.new('ssh -i ~/.ssh/bastion_key bastion@localhost -p 2222 -W %h:%p')
   }
 
 set :rails_env, 'production'
