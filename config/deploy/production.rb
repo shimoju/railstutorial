@@ -14,8 +14,7 @@ server 'all',
     keys: %w(~/.ssh/deploy_key),
     forward_agent: true,
     auth_methods: %w(publickey),
-    # TODO: ドメイン名で指定したい
-    proxy: Net::SSH::Proxy::Command.new('ssh -i ~/.ssh/bastion_key bastion@163.44.191.76 -W %h:%p')
+    proxy: Net::SSH::Proxy::Command.new('ssh -i ~/.ssh/bastion_key bastion@bastion.currry.xyz -W %h:%p')
   }
 
 set :rails_env, 'production'
