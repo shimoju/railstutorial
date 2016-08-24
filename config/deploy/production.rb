@@ -15,10 +15,9 @@
       keys: %w(~/.ssh/deploy_key),
       forward_agent: true,
       auth_methods: %w(publickey),
-      proxy: Net::SSH::Proxy::Command.new('ssh -i ~/.ssh/bastion_key bastion@localhost -p 2222 -W %h:%p')
+      proxy: Net::SSH::Proxy::Command.new('ssh -i ~/.ssh/bastion_key bastion@bastion.currry.xyz -p 2222 -W %h:%p')
     }
 end
->>>>>>> 複数のappサーバにデプロイ
 set :rails_env, 'production'
 set :branch, 'master'
 
