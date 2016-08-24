@@ -6,17 +6,17 @@
 # server 'example.com', user: 'deploy', roles: %w{app db web}, my_property: :my_value
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
-
-server 'all',
-  user: 'deploy',
-  roles: %w{app db web},
-  ssh_options: {
-    keys: %w(~/.ssh/deploy_key),
-    forward_agent: true,
-    auth_methods: %w(publickey),
-    proxy: Net::SSH::Proxy::Command.new('ssh -i ~/.ssh/bastion_key bastion@localhost -p 2222 -W %h:%p')
-  }
-
+%w(app01 app02).each do |host|
+  server host,
+    user: 'deploy',
+    roles: %w{app db web},
+    ssh_options: {
+      keys: %w(~/.ssh/deploy_key),
+      forward_agent: true,
+      auth_methods: %w(publickey),
+      proxy: Net::SSH::Proxy::Command.new('ssh -i ~/.ssh/bastion_key bastion@localhost -p 2222 -W %h:%p')
+    }
+end
 set :rails_env, 'production'
 set :branch, 'master'
 
