@@ -27,7 +27,10 @@ group :development, :test do
 end
 
 group :development do
-  gem 'capistrano'
+  gem 'net-ssh',          '4.0.0.beta3'
+  gem 'bcrypt_pbkdf'
+  gem 'rbnacl-libsodium', '1.0.10'
+  gem 'capistrano',       '3.6.1'
   gem 'capistrano-rails'
   gem 'capistrano3-unicorn'
 end

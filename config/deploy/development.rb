@@ -9,7 +9,7 @@
 %w(app01 app02).each do |host|
   server host,
     user: 'deploy',
-    roles: %w{app db web},
+    roles: %w{app db},
     ssh_options: {
       keys: %w(~/.ssh/deploy_key),
       forward_agent: true,
@@ -17,6 +17,7 @@
       proxy: Net::SSH::Proxy::Command.new('ssh -oStrictHostKeyChecking=no -i ~/.ssh/bastion_key fitness@localhost -p 2222 -W %h:%p')
     }
 end
+
 set :rails_env, 'production'
 set :branch, 'master'
 

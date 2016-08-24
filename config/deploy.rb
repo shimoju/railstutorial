@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.5.0'
+lock '3.6.1'
 
 set :application, 'railstutorial'
 set :repo_url, 'https://github.com/ogidow/railstutorial.git'
