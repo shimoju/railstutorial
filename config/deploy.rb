@@ -60,8 +60,8 @@ namespace :deploy do
     end
   end
   
-  desc 'deploy asset files to revproxy instance'
-  task :assets do
+  desc 'deploy static files to revproxy instance'
+  task :static_files do
     on roles(:revproxy) do
       upload!('public/', "#{deploy_to}/public", recursive: true)
     end
