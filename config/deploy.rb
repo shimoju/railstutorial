@@ -66,9 +66,4 @@ namespace :deploy do
       upload!('public/', "#{deploy_to}/public", recursive: true)
     end
   end
-
-  namespace :assets do
-    taks :precompile do
-    end
-  end
 end
