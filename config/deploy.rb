@@ -66,6 +66,9 @@ namespace :static_files do
   desc 'deploy static files to revproxy instance'
   task :deploy do
     on roles(:revproxy) do
+      if test "[ -d #{deploy_to}/public ];"
+        execute :rm, "-rf", "#{deploy_to}/public"
+      end
       upload!('public/', "#{deploy_to}/public", recursive: true)
     end
   end
