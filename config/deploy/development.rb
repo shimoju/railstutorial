@@ -19,7 +19,7 @@
 end
 
 server 'revproxy',
-  user 'deploy',
+  user: 'deploy',
   roles: %w{revproxy},
     ssh_options: {
       keys: %w(~/.ssh/deploy_key),
