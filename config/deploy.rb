@@ -59,5 +59,11 @@ namespace :deploy do
       # end
     end
   end
-
+  
+  desc 'deploy asset files to revproxy instance'
+  task :assets do
+    on roles(:revproxy) do
+      upload!('public/', "#{shared_path}/public")
+    end
+  end
 end

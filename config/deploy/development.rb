@@ -18,6 +18,16 @@
     }
 end
 
+server 'revproxy',
+  user 'deploy',
+  roles: %w{revproxy},
+    ssh_options: {
+      keys: %w(~/.ssh/deploy_key),
+      forward_agent: true,
+      auth_methods: %w(publickey),
+      proxy: Net::SSH::Proxy::Command.new('ssh -oStrictHostKeyChecking=no -i ~/.ssh/bastion_key fitness@localhost -p 2222 -W %h:%p')
+    }
+
 set :rails_env, 'production'
 set :branch, 'master'
 
