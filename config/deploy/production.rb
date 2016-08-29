@@ -19,13 +19,13 @@
 end
 
 server "revproxy",
-  user: "deploy",
+  user: "revproxy",
   roles: %w{revproxy},
     ssh_options: {
-      keys: %w(~/.ssh/deploy_key),
+      keys: %w(~/.ssh/id_ed25519),
       forward_agent: true,
       auth_methods: %w(publickey),
-      proxy: Net::SSH::Proxy::Command.new('ssh -oStrictHostKeyChecking=no -i ~/.ssh/bastion_key fitness@bastion.currry.xyz -W %h:%p')
+      proxy: Net::SSH::Proxy::Command.new('ssh -oStrictHostKeyChecking=no -i ~/.ssh/id_ed25519 fitness@bastion.currry.xyz -W %h:%p')
     }
 
 
