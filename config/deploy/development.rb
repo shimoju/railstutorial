@@ -20,7 +20,7 @@ end
 
 server 'revproxy',
   user: 'revproxy',
-  roles: :static_files, no_release: true,
+  roles: :revproxy, no_release: true,
     ssh_options: {
       keys: %w(~/.ssh/id_ed25519),
       forward_agent: true,
