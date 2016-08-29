@@ -62,6 +62,9 @@ namespace :deploy do
 
   desc 'deploy static files to revproxy instance'
   task :static_files do
+    run_locally do
+      execute "RAILS_ENV=production bundle exec rake assets:precompile assets:clean"
+    end
     on roles(:revproxy) do
       if test "[ -d #{deploy_to}/public ];"
         execute :rm, "-rf", "#{deploy_to}/public"
