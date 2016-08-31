@@ -25,7 +25,7 @@ server 'revproxy',
       keys: %w(~/.ssh/id_ed25519),
       forward_agent: true,
       auth_methods: %w(publickey),
-      proxy: Net::SSH::Proxy::Command.new('ssh -oStrictHostKeyChecking=no -i ~/.ssh/id_ed25519 fitness@localhost -p 2222 -W %h:%p')
+      proxy: Net::SSH::Proxy::Command.new('ssh -oStrictHostKeyChecking=no -i ~/.ssh/id_ed25519 revproxy@localhost -p 2222 -W %h:%p')
     }
 
 set :rails_env, 'production'
