@@ -9,7 +9,7 @@
 %w(app01 app02).each do |host|
   server host,
     user: 'rails',
-    roles: %w{app db},
+    roles: %w{app db web},
     ssh_options: {
       keys: %w(~/.ssh/id_ed25519),
       forward_agent: true,
