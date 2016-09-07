@@ -24,3 +24,5 @@
 
 # Ignore vendor
 /vendor/*
+
+/public/assets

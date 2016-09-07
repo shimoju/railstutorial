@@ -9,7 +9,7 @@
 %w(app_a01 app_a02).each do |host|
   server host,
     user: 'rails',
-    roles: %w{app db},
+    roles: %w{app db web},
     ssh_options: {
       keys: %w(~/.ssh/id_ed25519),
       forward_agent: true,
@@ -17,6 +17,17 @@
       proxy: Net::SSH::Proxy::Command.new('ssh -oStrictHostKeyChecking=no -i ~/.ssh/id_ed25519 rails@bastion_a.currry.xyz -W %h:%p')
     }
 end
+
+server "revproxy",
+  user: "revproxy",
+  roles: :revproxy, no_release: true,
+    ssh_options: {
+      keys: %w(~/.ssh/id_ed25519),
+      forward_agent: true,
+      auth_methods: %w(publickey),
+      proxy: Net::SSH::Proxy::Command.new('ssh -oStrictHostKeyChecking=no -i ~/.ssh/id_ed25519 revproxy@bastion.currry.xyz -W %h:%p')
+    }
+
 
 set :rails_env, 'production'
 set :branch, 'master'
