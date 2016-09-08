@@ -71,9 +71,9 @@ Rails.application.configure do
     :address => 'smtp.lolipop.jp',
     :port => '587',
     :authentication => :plain,
-    :user_name => ENV['LOLIPOP_USERNAME'],
-    :password => ENV['LOLIPOP_PASSWORD'],
-    :domain => 'ogidow.mongolian.jp',
+    :user_name => Rails.application.secrets[:mail_account],
+    :password => Rails.application.secrets[:mail_password],
+    :domain => Rails.application.secrets[:mail_domain],
     :enable_starttls_auto => true
    }
 
