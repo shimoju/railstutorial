@@ -18,14 +18,14 @@
     }
 end
 
-server "revproxy",
+server "revproxy_a01",
   user: "revproxy",
   roles: :revproxy, no_release: true,
     ssh_options: {
       keys: %w(~/.ssh/id_ed25519),
       forward_agent: true,
       auth_methods: %w(publickey),
-      proxy: Net::SSH::Proxy::Command.new('ssh -oStrictHostKeyChecking=no -i ~/.ssh/id_ed25519 revproxy@bastion.currry.xyz -W %h:%p')
+      proxy: Net::SSH::Proxy::Command.new('ssh -oStrictHostKeyChecking=no -i ~/.ssh/id_ed25519 revproxy@bastion_a.currry.xyz -W %h:%p')
     }
 
 
