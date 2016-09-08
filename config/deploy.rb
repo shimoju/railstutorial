@@ -61,7 +61,7 @@ namespace :deploy do
   end
 
   desc 'deploy static files to revproxy instance'
-  task :static_files do
+  after :log_revision, :static_files do
     run_locally do
       execute "RAILS_ENV=production bundle exec rake assets:precompile assets:clean"
     end
