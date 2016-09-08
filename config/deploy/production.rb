@@ -6,7 +6,7 @@
 # server 'example.com', user: 'deploy', roles: %w{app db web}, my_property: :my_value
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
-%w(app01 app02).each do |host|
+%w(app_a01 app_a02).each do |host|
   server host,
     user: 'rails',
     roles: %w{app db web},
@@ -14,18 +14,18 @@
       keys: %w(~/.ssh/id_ed25519),
       forward_agent: true,
       auth_methods: %w(publickey),
-      proxy: Net::SSH::Proxy::Command.new('ssh -oStrictHostKeyChecking=no -i ~/.ssh/id_ed25519 rails@bastion.currry.xyz -W %h:%p')
+      proxy: Net::SSH::Proxy::Command.new('ssh -oStrictHostKeyChecking=no -i ~/.ssh/id_ed25519 rails@bastion_a.currry.xyz -W %h:%p')
     }
 end
 
-server "revproxy",
+server "revproxy_a01",
   user: "revproxy",
   roles: :revproxy, no_release: true,
     ssh_options: {
       keys: %w(~/.ssh/id_ed25519),
       forward_agent: true,
       auth_methods: %w(publickey),
-      proxy: Net::SSH::Proxy::Command.new('ssh -oStrictHostKeyChecking=no -i ~/.ssh/id_ed25519 revproxy@bastion.currry.xyz -W %h:%p')
+      proxy: Net::SSH::Proxy::Command.new('ssh -oStrictHostKeyChecking=no -i ~/.ssh/id_ed25519 revproxy@bastion_a.currry.xyz -W %h:%p')
     }
 
 
