@@ -14,6 +14,7 @@
       keys: %w(~/.ssh/id_ed25519),
       forward_agent: true,
       auth_methods: %w(publickey),
+      user_known_hosts_file: '/dev/null',
       proxy: Net::SSH::Proxy::Command.new('ssh -p 2222 -i ~/.ssh/id_ed25519 rails@localhost -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -W %h:%p')
     }
 end
@@ -25,6 +26,7 @@ server 'revproxy_a01',
       keys: %w(~/.ssh/id_ed25519),
       forward_agent: true,
       auth_methods: %w(publickey),
+      user_known_hosts_file: '/dev/null',
       proxy: Net::SSH::Proxy::Command.new('ssh -p 2222 -i ~/.ssh/id_ed25519 revproxy@localhost -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -W %h:%p')
     }
 
