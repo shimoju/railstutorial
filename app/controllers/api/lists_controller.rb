@@ -1,4 +1,4 @@
-class Api::ListsController < ApplicationController
+class Api::ListsController < Api::ApplicationController
   before_action :check_auth_token, only: [:show, :create, :destroy]
   before_action :correct_user, only: :destroy
 
