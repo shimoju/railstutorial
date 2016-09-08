@@ -6,7 +6,7 @@
 # server 'example.com', user: 'deploy', roles: %w{app db web}, my_property: :my_value
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
-%w(app01 app02).each do |host|
+%w(app_a01 app_a02).each do |host|
   server host,
     user: 'rails',
     roles: %w{app db web},
@@ -18,7 +18,7 @@
     }
 end
 
-server 'revproxy',
+server 'revproxy_a01',
   user: 'revproxy',
   roles: :revproxy, no_release: true,
     ssh_options: {
