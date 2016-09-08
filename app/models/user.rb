@@ -98,6 +98,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def create_list(name)
+    lists.create(name: name)
+  end
+
   private
 
     def downcase_email
