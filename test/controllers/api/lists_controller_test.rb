@@ -13,7 +13,7 @@ class Api::ListsControllerTest < ActionController::TestCase
         user_id: ""
       }
     end
-    assert_response :unprocessable_entity
+    assert_response :unauthorized
   end
 
   test "delete list with invalid data" do
