@@ -1,2 +1,2 @@
-module Api::Lists::ListMembersHelper
+module  Api::Lists::MembersHelper
 end
