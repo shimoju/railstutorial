@@ -21,6 +21,11 @@ class Api::UsersControllerTest < ActionController::TestCase
     assert_response :unauthorized
   end
 
+  test "ユーザのfeed取得(認証なし)" do
+    get :feed, format: :json
+    assert_response :unauthorized
+  end
+
   test "ユーザのサインアップ(失敗)" do
     assert_no_difference "User.count" do
       post :create, format: :json, user: {
