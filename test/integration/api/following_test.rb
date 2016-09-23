@@ -26,6 +26,12 @@ class Api::FollowingTest < ActionDispatch::IntegrationTest
   end
 
   test "アンフォローできること" do
+    @user.follow(@other)
+    relationship = @user.active_relationships.find_by(followed_id: @other.id)
+    assert_difference '@user.following.count', -1 do
+      delete api_relationship_path(relationship), {}, @headers
+    end
+    assert_response :ok
   end
 
   test "他のユーザーのフォローは操作できないこと" do
