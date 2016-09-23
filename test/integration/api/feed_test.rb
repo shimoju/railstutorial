@@ -3,14 +3,12 @@ require 'test_helper'
 class Api::FeedTest< ActionDispatch::IntegrationTest
   def setup
     @user = users(:michael)
-    @active_user = users(:archer)
-    @non_active_user = users(:ogido)
     
     token = @user.generate_jwt
     @headers = {"Authorization" => "Bearer #{token}"}
   end
 
-  test "feed取得" do
+  test "feed取得(アクティブ時)" do
     get api_feed_path, {}, @headers
     assert_response :success
 
