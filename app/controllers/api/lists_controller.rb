@@ -13,7 +13,7 @@ class Api::ListsController < Api::ApplicationController
     else
       build_json = Jbuilder.encode do |json|
         json.message "Validation Failed"
-        json.errors = @micropost.errors.messages 
+        json.errors = @list.errors.messages 
       end
       render json: build_json, status: :unprocessable_entity
     end
