@@ -33,7 +33,4 @@ class Api::FollowingTest < ActionDispatch::IntegrationTest
     end
     assert_response :ok
   end
-
-  test "他のユーザーのフォローは操作できないこと" do
-  end
 end
