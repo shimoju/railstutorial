@@ -41,7 +41,7 @@ class Api::ListsController < Api::ApplicationController
   end
 
   def correct_user
-    list = current_user.lists.find(params[:id])
+    list = current_user.lists.find_by(id: params[:id])
     render nothing: true, status: :forbidden and return if list.nil?
   end
 end
