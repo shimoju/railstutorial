@@ -16,6 +16,11 @@ class Api::UsersControllerTest < ActionController::TestCase
     assert_response :unauthorized
   end
 
+  test "ユーザのmicropost一覧取得(認証なし)" do
+    get :microposts, format: :json, user_id: @user
+    assert_response :unauthorized
+  end
+
   test "ユーザのサインアップ(失敗)" do
     assert_no_difference "User.count" do
       post :create, format: :json, user: {
