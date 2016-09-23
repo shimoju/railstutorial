@@ -53,6 +53,11 @@ class Api::UsersController < Api::ApplicationController
   def followers
   end
 
+  def microposts
+    @microposts = User.find(params[:user_id]).microposts
+    render 'microposts', status: :ok
+  end
+
   private
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
