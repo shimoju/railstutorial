@@ -13,9 +13,6 @@ class Api::FollowingTest < ActionDispatch::IntegrationTest
       post api_relationships_path, {relationship: {followed_id: @other.id}}, @headers
     end
     assert_response :created
-
-    # params = response_json
-    # assert_equal params[:relationship][:followed_id], @other.id
   end
 
   test "フォローする人を正しく指定しなければエラーを返すこと" do

@@ -6,7 +6,7 @@ class Api::RelationshipsController < Api::ApplicationController
     render status: :unprocessable_entity and return if @user.nil?
 
     current_user.follow(@user)
-    render status: :created
+    render nothing: true, status: :created
   end
 
   def destroy
