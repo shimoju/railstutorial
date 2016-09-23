@@ -39,7 +39,7 @@ Rails.application.routes.draw do
     resources :relationships, only: [:create, :destroy]
 
     resources :lists do
-      resources :members, module: :lists
+      resources :members, only: [:create, :destroy, :index], module: :lists
       member do 
         get :feed
       end

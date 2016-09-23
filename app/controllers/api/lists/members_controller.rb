@@ -1,15 +1,15 @@
-class Api::Lists::ListMembersController < Api::ApplicationController
+class Api::Lists::MembersController < Api::ApplicationController
   before_action :check_auth_token, only: [:create, :destroy]
 
-  def show
-    @members = ListMember.find(params[:list_id])
+  def index
+    @members = List.find(params[:list_id]).members
   end
 
   def create
     @member = ListMember.new(list_member_params)
     if @member.save
       render status: :created
-    else
+    else1
       build_json = Jbuilder.encode do |json|
         json.message "Validation Failed"
         json.errors = @member.errors.messages
