@@ -20,10 +20,6 @@ class Api::FollowingTest < ActionDispatch::IntegrationTest
 
   test "フォローする人を正しく指定しなければエラーを返すこと" do
     assert_no_difference "@user.following.count" do
-      post api_relationships_path, {}, @headers
-    end
-    assert_response :unprocessable_entity
-    assert_no_difference "@user.following.count" do
       post api_relationships_path, {relationship: {followed_id: ""}}, @headers
     end
     assert_response :unprocessable_entity

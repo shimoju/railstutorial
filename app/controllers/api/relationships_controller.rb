@@ -2,7 +2,9 @@ class Api::RelationshipsController < Api::ApplicationController
   before_action :check_auth_token
 
   def create
-    @user = User.find(relationship_params[:followed_id])
+    @user = User.find_by(id: relationship_params[:followed_id])
+    render status: :unprocessable_entity and return if @user.nil?
+
     current_user.follow(@user)
     render status: :created
   end
