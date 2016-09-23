@@ -1,4 +1,6 @@
-class Api::RelationshipsController < ApplicationController
+class Api::RelationshipsController < Api::ApplicationController
+  before_action :check_auth_token, only: [:create, :destroy]
+
   def create
   end
 
