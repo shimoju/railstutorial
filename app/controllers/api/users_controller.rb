@@ -54,7 +54,12 @@ class Api::UsersController < Api::ApplicationController
   end
 
   def microposts
-    @microposts = User.find(params[:user_id]).microposts
+    @user = User.find(params[:user_id])
+
+    render nothing: true, status: :forbidden and return unless @user.activated?
+
+    @microposts = @user.microposts
+
     render 'microposts', status: :ok
   end
 
