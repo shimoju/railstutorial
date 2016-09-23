@@ -35,5 +35,6 @@ Rails.application.routes.draw do
     end
     post 'auth' => 'sessions#create'
     resources :microposts, only: [:create, :destroy]
+    get 'feed' => 'users#feed'
   end
 end
