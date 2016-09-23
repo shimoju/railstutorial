@@ -1,6 +1,6 @@
 class Api::ListsController < Api::ApplicationController
-  before_action :check_auth_token, only: [:show, :create, :destroy]
-  before_action :correct_user, only: :destroy
+  before_action :check_auth_token
+  before_action :correct_user, only: [:destroy, :update]
 
   def show
     @list_members = List.find(params[:id]).list_member
@@ -16,6 +16,15 @@ class Api::ListsController < Api::ApplicationController
         json.errors = @micropost.errors.messages 
       end
       render json: build_json, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    @lists = List.find(params[:id])
+    if @list.update_attributes(list_params)
+      render status: :ok
+    else
+      render nothing: true, status: :unprocessable_entity
     end
   end
 
