@@ -1,5 +1,5 @@
 class Api::Lists::MembersController < Api::ApplicationController
-  before_action :check_auth_token, only: [:create, :destroy]
+  before_action :check_auth_token
   before_action :correct_user, except: [:index]
 
   def index
