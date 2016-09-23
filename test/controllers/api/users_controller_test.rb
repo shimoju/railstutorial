@@ -59,7 +59,7 @@ class Api::UsersControllerTest < ActionController::TestCase
   end
 
   test "ユーザのアップデート(認証なし)" do
-    patch :update, format: :json, id: @user.id, 
+    patch :update, format: :json, id: @user.id,
                                   user: {
                                           name: "ogidow",
                                           email: "test@test.com",
@@ -71,6 +71,15 @@ class Api::UsersControllerTest < ActionController::TestCase
 
   test "ユーザが所持しているリスト一覧取得(認証なし)" do
     get :lists, format: :json
+  end
+
+  test "フォローリストの表示(認証なし)" do
+    get :following, format: :json, user_id: @user
+    assert_response :unauthorized
+  end
+
+  test "フォロワーリストの表示(認証なし)" do
+    get :followers, format: :json, user_id: @user
     assert_response :unauthorized
   end
 end
