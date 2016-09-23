@@ -1,5 +1,6 @@
 class Api::Lists::MembersController < Api::ApplicationController
   before_action :check_auth_token, only: [:create, :destroy]
+  before_action :correct_user, except: [:index]
 
   def index
     @members = List.find(params[:list_id]).members
@@ -30,6 +31,12 @@ class Api::Lists::MembersController < Api::ApplicationController
 
     list_member.destroy
     render nothing: true, status: :ok
+  end
+  
+  private
+  def correct_user
+    list = List.find_by(id: params[:list_id])
+    render nothing: true, status: :forbidden and return unless current_user.lists.include?(list)
   end
 
 end
