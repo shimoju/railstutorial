@@ -24,11 +24,12 @@ class Api::ListsControllerTest < ActionController::TestCase
   end
 
   test "認証なしでfeedの取得" do
-    get :feed, format: json, id: @list
+    get :feed, format: :json, id: @list
     assert_response :unauthorized
   end
 
   test "認証なしでリストの更新" do
-    patch :update, format: json, {list: {name: "ogidow"}, id: @list}
+    patch :update, format: :json, id: @list, list:{name: "ogidow"}
+    assert_response :unauthorized
   end
 end
