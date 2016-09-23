@@ -2,8 +2,7 @@ require 'test_helper'
 
 class Api::ListsControllerTest < ActionController::TestCase
   def setup
-    @user = users(:michael)
-    @list = lists(:one)
+    @list = lists(:friend)
   end
 
   test "create list with invalid data" do
