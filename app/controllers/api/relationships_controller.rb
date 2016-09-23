@@ -1,5 +1,5 @@
 class Api::RelationshipsController < Api::ApplicationController
-  before_action :check_auth_token, only: [:create, :destroy]
+  before_action :check_auth_token
 
   def create
     @user = User.find(params[:followed_id])
