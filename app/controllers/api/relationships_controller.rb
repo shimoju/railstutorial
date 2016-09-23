@@ -18,8 +18,10 @@ class Api::RelationshipsController < Api::ApplicationController
   end
 
   def destroy
-    @user = Relationship.find(params[:id]).followed
-    current_user.unfollow(@user)
+    @relation = Relationship.find_by(id: params[:id])
+    render nothing: true, status: :unprocessable_entity and return if @relation.nil?
+
+    current_user.unfollow(@relation.followed)
     render nothing: true, status: :ok
   end
 

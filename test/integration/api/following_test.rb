@@ -41,4 +41,15 @@ class Api::FollowingTest < ActionDispatch::IntegrationTest
     end
     assert_response :ok
   end
+
+  test "アンフォローできなければエラーを返すこと" do
+    @user.follow(@other)
+    relationship = @user.active_relationships.find_by(followed_id: @other.id)
+    delete api_relationship_path(relationship), {}, @headers
+
+    assert_no_difference '@user.following.count' do
+      delete api_relationship_path(relationship), {}, @headers
+    end
+    assert_response :unprocessable_entity
+  end
 end
