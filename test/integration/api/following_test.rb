@@ -22,6 +22,14 @@ class Api::FollowingTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
   end
 
+  test "既にフォロー済みの人をフォローしようとしたときはエラーを返すこと" do
+    @user.follow(@other)
+    assert_no_difference "@user.following.count" do
+      post api_relationships_path, {relationship: {followed_id: @other.id}}, @headers
+    end
+    assert_response :unprocessable_entity
+  end
+
   test "アンフォローできること" do
     @user.follow(@other)
     relationship = @user.active_relationships.find_by(followed_id: @other.id)
