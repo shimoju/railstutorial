@@ -3,7 +3,7 @@ class Api::RelationshipsController < Api::ApplicationController
 
   def create
     @user = User.find_by(id: relationship_params[:followed_id])
-    render status: :unprocessable_entity and return if @user.nil?
+    render nothing: true, status: :unprocessable_entity and return if @user.nil?
 
     current_user.follow(@user)
     render nothing: true, status: :created
