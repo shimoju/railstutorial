@@ -2,8 +2,8 @@
 
 friend:
   name: friend
-  user_id: michael
+  user: michael
 
 curry:
   name: curry
-  user_id: lana
+  user: lana
