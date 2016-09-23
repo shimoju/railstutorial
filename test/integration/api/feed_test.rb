@@ -8,7 +8,7 @@ class Api::FeedTest< ActionDispatch::IntegrationTest
     @headers = {"Authorization" => "Bearer #{token}"}
   end
 
-  test "feed取得(アクティブ時)" do
+  test "feed取得" do
     get api_feed_path, {}, @headers
     assert_response :success
 
