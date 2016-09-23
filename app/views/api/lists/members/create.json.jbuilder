@@ -1,3 +1,3 @@
 json.member do
-  json.extract! @micropost, :list_id, :user_id
+  json.partial! "api/users/user", user: @user
 end
