@@ -20,7 +20,7 @@ class Api::ListsController < Api::ApplicationController
   end
 
   def update
-    @lists = List.find(params[:id])
+    @list = List.find(params[:id])
     if @list.update_attributes(list_params)
       render status: :ok
     else
