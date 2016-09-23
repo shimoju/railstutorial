@@ -1,3 +1,3 @@
 json.list do
-  json.partial! "list", list: @list
+  json.extract! @list, :id, :name, :user_id
 end
