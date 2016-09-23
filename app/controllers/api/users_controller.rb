@@ -1,6 +1,6 @@
 
 class Api::UsersController < Api::ApplicationController
-  before_action :check_auth_token, only: [:index, :show, :update, :destroy, :following, :followers]
+  before_action :check_auth_token, except: [:create]
   before_action :correct_user, only: :update
   before_action :admin_user, only: :destroy
 
@@ -51,6 +51,16 @@ class Api::UsersController < Api::ApplicationController
   end
 
   def followers
+  end
+
+  def microposts
+    @user = User.find(params[:user_id])
+
+    render nothing: true, status: :forbidden and return unless @user.activated?
+
+    @microposts = @user.microposts
+
+    render 'microposts', status: :ok
   end
 
   private
