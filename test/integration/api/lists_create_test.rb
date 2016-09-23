@@ -18,4 +18,11 @@ class Api::ListCreateTest < ActionDispatch::IntegrationTest
 
     assert_equal params[:list][:name], list_name
   end
+
+  test "間違った入力値でリクエスト" do
+    assert_no_difference "List.count" do
+      post api_lists_path, {list: {name: ""}}, @headers
+    end
+    assert_response :unprocessable_entity
+  end
 end
