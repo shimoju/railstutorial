@@ -5,4 +5,9 @@ class List < ActiveRecord::Base
   
   validates :name, presence: true
   validates :user_id, presence: true
+
+  def feed
+    following_ids = "SELECT user_id FROM list_members WHERE list_id = :list_id"
+    Micropost.where("user_id IN (#{following_ids})", list_id: id)
+  end
 end

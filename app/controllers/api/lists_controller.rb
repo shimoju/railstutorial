@@ -34,6 +34,13 @@ class Api::ListsController < Api::ApplicationController
     render nothing: true, status: :ok
   end
 
+  def feed
+    list = List.find_by(id: params[:list_id])
+    @feed = list.feed
+
+    render status: :ok
+  end
+
   private
 
   def list_params
