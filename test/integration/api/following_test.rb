@@ -4,7 +4,7 @@ class Api::FollowingTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:michael)
     @other = users(:archer)
-    token = user.generate_jwt
+    token = @user.generate_jwt
     @headers = {"Authorization" => "Bearer #{token}"}
   end
 
