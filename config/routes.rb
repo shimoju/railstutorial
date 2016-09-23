@@ -30,7 +30,9 @@ Rails.application.routes.draw do
 
   #json api
   namespace :api, {format: 'json'} do
-    resources :users
+    resources :users do
+      get :microposts
+    end
     post 'auth' => 'sessions#create'
     resources :microposts, only: [:create, :destroy]
   end
