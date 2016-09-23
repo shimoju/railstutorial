@@ -3,7 +3,7 @@ class Api::ListsController < Api::ApplicationController
   before_action :correct_user, only: [:destroy, :update]
 
   def show
-    @list_members = List.find(params[:id]).list_member
+    @list = List.find(params[:id])
   end
 
   def create
