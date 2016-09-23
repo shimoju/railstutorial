@@ -29,8 +29,7 @@ class Api::FollowingTest < ActionDispatch::IntegrationTest
     end
     assert_response :unprocessable_entity
 
-    params = response_json
-    assert_equal params[:errors][:followed_id], ["has already been taken"]
+    assert_equal response_json[:errors][:followed_id], ["has already been taken"]
   end
 
   test "アンフォローできること" do
