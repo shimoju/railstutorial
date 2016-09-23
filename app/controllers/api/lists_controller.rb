@@ -35,7 +35,7 @@ class Api::ListsController < Api::ApplicationController
   end
 
   def feed
-    list = List.find_by(id: params[:list_id])
+    list = List.find_by(id: params[:id])
     @feed = list.feed
 
     render status: :ok
