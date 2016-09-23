@@ -1,6 +1,6 @@
 
 class Api::UsersController < Api::ApplicationController
-  before_action :check_auth_token, only: [:index, :show, :update, :destroy, :following, :followers, :microposts]
+  before_action :check_auth_token, except: [:create]
   before_action :correct_user, only: :update
   before_action :admin_user, only: :destroy
 
