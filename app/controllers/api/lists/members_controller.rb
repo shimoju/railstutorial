@@ -23,14 +23,13 @@ class Api::Lists::MembersController < Api::ApplicationController
   end
 
   def destroy
-    member = List.find(params[:list_id]).list_member.find(params[:id])
-    member.destroy
+    list = List.find_by(id: params[:list_id])
+    render nothing: true, status: :unprocessable_entity and return if list.nil?
+    list_member = list.list_members.find_by(user_id: params[:id])
+    render nothing: true, status: :unprocessable_entity and return if list_member.nil?
+
+    list_member.destroy
     render nothing: true, status: :ok
   end
 
-  private
-
-  def list_member_params
-    params.require(:member).permit(:list_id, :user_id)
-  end
 end
