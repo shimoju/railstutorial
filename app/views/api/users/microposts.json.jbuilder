@@ -1,3 +1,3 @@
 json.microposts do
-  json.array! @microposts, :id
+  json.array! @microposts
 end
