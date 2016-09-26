@@ -8,10 +8,12 @@ class Api::UsersListsTest < ActionDispatch::IntegrationTest
   end
 
   test "リスト一覧を取得" do
-    my_list = @user.lists.first
+    my_list_names = @user.lists.map{|list| list.name}
     get api_lists_path, {}, @headers
     assert_response :ok
 
-    assert response_json[:lists].select{|list| list[:name] == my_list.name}
+    response_json[:lists].each do |list|
+      assert my_list_names.include?(list[:name])
+    end
   end
 end
