@@ -37,5 +37,12 @@ Rails.application.routes.draw do
     resources :microposts, only: [:create, :destroy]
     get 'feed' => 'users#feed'
     resources :relationships, only: [:create, :destroy]
+
+    resources :lists do
+      resources :members, only: [:create, :destroy, :index], module: :lists
+      member do 
+        get :feed
+      end
+    end
   end
 end

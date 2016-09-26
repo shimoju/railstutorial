@@ -11,7 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160706051244) do
+ActiveRecord::Schema.define(version: 20160908064158) do
+
+  create_table "list_members", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "list_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "list_members", ["list_id"], name: "index_list_members_on_list_id"
+  add_index "list_members", ["user_id"], name: "index_list_members_on_user_id"
+
+  create_table "lists", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "lists", ["user_id"], name: "index_lists_on_user_id"
 
   create_table "microposts", force: :cascade do |t|
     t.text     "content"
