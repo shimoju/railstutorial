@@ -16,4 +16,14 @@ class Api::UsersListsTest < ActionDispatch::IntegrationTest
       assert my_list_names.include?(list[:name])
     end
   end
+
+  test "リストのページング" do
+    get api_lists_path, {page: 1}, @headers
+    assert_response :ok
+    assert_equal 30, response_json[:lists].count
+
+    get api_lists_path, {page: 2}, @headers
+    assert_response :ok
+    assert_equal 1, response_json[:lists].count
+  end
 end

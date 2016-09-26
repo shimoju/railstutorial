@@ -80,7 +80,7 @@ class Api::UsersController < Api::ApplicationController
   def lists
     @user = current_user
     render nothing: true, status: :forbidden and return unless @user.activated?
-    @lists = @user.lists
+    @lists = @user.lists.paginate(page: params[:page])
     render status: :ok
   end
 

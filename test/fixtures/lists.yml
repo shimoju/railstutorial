@@ -7,3 +7,9 @@ friend:
 curry:
   name: curry
   user: lana
+
+<% 30.times do |n| %>
+list_<%= n %>:
+  name: list_<%= n %>
+  user: michael
+<% end %>
