@@ -71,6 +71,13 @@ class Api::UsersController < Api::ApplicationController
     render 'feed', status: :ok
   end
 
+  def lists
+    @user = current_user
+    render nothing: true, status: :forbidden and return unless @user.activated?
+    @lists = @user.lists
+    render status: :ok
+  end
+
   private
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
