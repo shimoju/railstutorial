@@ -68,4 +68,9 @@ class Api::UsersControllerTest < ActionController::TestCase
                                         }
     assert_response :unauthorized
   end
+
+  test "ユーザが所持しているリスト一覧取得(認証なし)" do
+    get :lists, format: :json
+    assert_response :unauthorized
+  end
 end
