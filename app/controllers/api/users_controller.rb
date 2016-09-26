@@ -58,7 +58,7 @@ class Api::UsersController < Api::ApplicationController
 
     render nothing: true, status: :forbidden and return unless @user.activated?
 
-    @microposts = @user.microposts.restrict request_microposts_params
+    @microposts = @user.microposts.restrict request_microposts_params.to_h.symbolize_keys
 
     render 'microposts', status: :ok
   end
@@ -66,7 +66,7 @@ class Api::UsersController < Api::ApplicationController
   def feed
     @user = current_user
     render nothing: true, status: :forbidden and return unless @user.activated?
-    @feed = @user.feed.restrict request_microposts_params
+    @feed = @user.feed.restrict request_microposts_params.to_h.symbolize_keys
 
     render 'feed', status: :ok
   end
