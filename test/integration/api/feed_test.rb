@@ -42,17 +42,41 @@ class Api::FeedTest< ActionDispatch::IntegrationTest
     assert_equal 10, response_json[:feed].length
   end
 
-  test "feed取得(idが)" do
-    get api_feed_path, {request_microposts: {count: 35}}, @headers
+  test "feed取得(idが10より後のmicropostのみ)" do
+    # since_idを指定
+    get api_feed_path, {request_microposts: {since_id: 10}}, @headers
     assert_response :success
 
-    # 50件取得する
-    assert_equal 35, response_json[:feed].length
-
-    # 全micropostのidが100超であることを検証
+    # 全micropostのidが10超であることを検証
     response_json[:feed].each do |micropost|
-      assert_operator micropost[:id], :>, 1000000000
+      assert_operator micropost[:id], :>, 10
     end
+  end
+
+  test "feed取得(idが10以前のmicropostのみ)" do
+    # since_idを指定
+    get api_feed_path, {request_microposts: {max_id: 10}}, @headers
+    assert_response :success
+
+    # 全micropostのidが10以下であることを検証
+    response_json[:feed].each do |micropost|
+      assert_operator micropost[:id], :<=, 10
+    end
+  end
+
+  test "feed取得(idが20以前かつ10より後のmicropostのみを5件取得)" do
+    # since_idを指定
+    get api_feed_path, {request_microposts: {count: 5, since_id: 10, max_id: 20}}, @headers
+    assert_response :success
+
+    # 全micropostのidが20以下10超であることを検証
+    response_json[:feed].each do |micropost|
+      assert_operator micropost[:id], :<=, 20
+      assert_operator micropost[:id], :>, 10
+    end
+
+    # 5件取得する
+    assert_equal 5, response_json[:feed].length
   end
 end
 
