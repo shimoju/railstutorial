@@ -35,7 +35,7 @@ Rails.application.routes.draw do
       get :following, :followers
     end
     post 'auth' => 'sessions#create'
-    resources :microposts, only: [:create, :destroy]
+    resources :microposts, only: [:create, :destroy, :show]
     get 'feed' => 'users#feed'
     resources :relationships, only: [:create, :destroy]
     get 'lists' => 'users#lists'
