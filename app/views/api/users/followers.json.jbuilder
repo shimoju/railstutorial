@@ -1,3 +1,6 @@
 json.followers do
-  json.array! @users
+  json.count @user.followers.count
+  json.users do
+    json.array! @users
+  end
 end

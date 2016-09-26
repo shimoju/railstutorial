@@ -55,10 +55,14 @@ class Api::FollowingTest < ActionDispatch::IntegrationTest
   test "フォローリストを取得できること" do
     get api_user_following_path(@user), {}, @headers
     assert_response :ok
+
+    assert_equal response_json[:following][:count], @user.following.count
   end
 
   test "フォロワーリストを取得できること" do
     get api_user_followers_path(@user), {}, @headers
     assert_response :ok
+
+    assert_equal response_json[:followers][:count], @user.followers.count
   end
 end
