@@ -12,11 +12,11 @@ class Micropost < ActiveRecord::Base
     result = self # これにメソッドチェーンでクエリをつけていく
 
     unless since_id.nil?
-      result = result.where(Micropost.arel_table[:id].gt since_id)
+      result = result.where("id > ?", since_id)
     end
 
     unless max_id.nil?
-      result = result.where(Micropost.arel_table[:id].lteq max_id)
+      result = result.where("id <= ?", max_id)
     end
 
     result.limit count
