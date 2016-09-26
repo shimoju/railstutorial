@@ -36,7 +36,7 @@ class Api::ListsController < Api::ApplicationController
 
   def feed
     list = List.find_by(id: params[:id])
-    @feed = list.feed
+    @feed = list.feed.restrict(request_microposts_params.to_h.symbolize_keys)
 
     render status: :ok
   end
@@ -50,5 +50,9 @@ class Api::ListsController < Api::ApplicationController
   def correct_user
     list = current_user.lists.find_by(id: params[:id])
     render nothing: true, status: :forbidden and return if list.nil?
+  end
+
+  def request_microposts_params
+    params.fetch(:request_microposts, {}).permit(:since_id, :max_id, :count)
   end
 end

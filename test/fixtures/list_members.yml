@@ -1,17 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user_id: michael
-  list_id: curry
+  user: michael
+  list: curry
 
 two:
-  user_id: archer
-  list_id: curry
+  user: archer
+  list: curry
 
 three:
-  user_id: archer
-  list_id: friend
+  user: archer
+  list: friend
 
 three:
-  user_id: malory
-  list_id: friend
+  user: malory
+  list: friend
