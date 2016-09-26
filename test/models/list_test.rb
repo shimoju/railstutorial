@@ -15,7 +15,7 @@ class ListTest < ActiveSupport::TestCase
   end
 
   test "nameが空" do
-    @list.name = nil
+    @list.name = ""
     assert_not @list.valid?
   end
 end
