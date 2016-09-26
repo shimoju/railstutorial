@@ -14,10 +14,12 @@ class Api::UsersShowTest < ActionDispatch::IntegrationTest
     get api_user_path(@active_user), {}, @headers
     assert_response :success
 
-    params = response_json
-    assert_not_nil params[:user]
-    assert_equal @active_user[:name], params[:user][:name]
-    assert_equal @active_user[:email], params[:user][:email]
+    assert_not_nil response_json[:user]
+    assert_equal @active_user[:name], response_json[:user][:name]
+    assert_equal @active_user[:email], response_json[:user][:email]
+
+    assert_equal @active_user.following.count, response_json[:user][:following_count]
+    assert_equal @active_user.followers.count, response_json[:user][:followers_count]
   end
 
   test "non_activeなユーザ情報取得" do
