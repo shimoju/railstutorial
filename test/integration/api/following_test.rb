@@ -51,4 +51,30 @@ class Api::FollowingTest < ActionDispatch::IntegrationTest
     end
     assert_response :unprocessable_entity
   end
+
+  test "フォローリストを取得できること" do
+    get api_user_following_path(@user), {}, @headers
+    assert_response :ok
+
+    following = response_json[:following]
+    assert_equal following[:count], @user.following.count
+    following[:users].each do |user|
+      %i(id name email).each do |element|
+        assert_not_nil user[element]
+      end
+    end
+  end
+
+  test "フォロワーリストを取得できること" do
+    get api_user_followers_path(@user), {}, @headers
+    assert_response :ok
+
+    followers = response_json[:followers]
+    assert_equal followers[:count], @user.followers.count
+    followers[:users].each do |user|
+      %i(id name email).each do |element|
+        assert_not_nil user[element]
+      end
+    end
+  end
 end

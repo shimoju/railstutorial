@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   namespace :api, {format: 'json'} do
     resources :users do
       get :microposts
+      get :following, :followers
     end
     post 'auth' => 'sessions#create'
     resources :microposts, only: [:create, :destroy]

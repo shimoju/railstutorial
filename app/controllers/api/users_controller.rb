@@ -41,16 +41,22 @@ class Api::UsersController < Api::ApplicationController
 
   def destroy
     user = User.find_by(id: params[:id])
-    render nothing: true, status: :not_found and return if user.nil? 
+    render nothing: true, status: :not_found and return if user.nil?
 
     user.destroy
     render nothing: true, status: :ok
   end
 
   def following
+    @user = User.find(params[:user_id])
+    @users = @user.following.paginate(page: params[:page])
+    render 'following', status: :ok
   end
 
   def followers
+    @user = User.find(params[:user_id])
+    @users = @user.followers.paginate(page: params[:page])
+    render 'followers', status: :ok
   end
 
   def microposts
