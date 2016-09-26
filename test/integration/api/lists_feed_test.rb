@@ -78,5 +78,4 @@ class Api::ListsFeedTest < ActionDispatch::IntegrationTest
     # 5件取得する
     assert_equal 5, response_json[:feed].length
   end
-	
 end
