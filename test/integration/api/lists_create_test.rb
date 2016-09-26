@@ -14,9 +14,8 @@ class Api::ListCreateTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :created
-    params = response_json
 
-    assert_equal params[:list][:name], list_name
+    assert_equal response_json[:list][:name], list_name
   end
 
   test "間違った入力値でリクエスト" do

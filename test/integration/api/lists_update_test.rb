@@ -18,11 +18,10 @@ class Api::ListsUpdateTest < ActionDispatch::IntegrationTest
     patch api_list_path(@list), {list: {name: list_name}}, @correct_headers
     
     assert_response :ok
-    params = response_json
     @list.reload
 
     assert_equal @list.name, list_name
-    assert_equal params[:list][:name], list_name
+    assert_equal response_json[:list][:name], list_name
   end
 
   test "自分のリストを正しくないパラメータ変更" do

@@ -10,8 +10,7 @@ class Api::ListsShowTest < ActionDispatch::IntegrationTest
 
   test "リストの情報取得" do
     get api_list_path(@list), {}, @headers
-    params = response_json
 
-    assert_equal params[:list][:name], @list.name
+    assert_equal response_json[:list][:name], @list.name
   end
 end

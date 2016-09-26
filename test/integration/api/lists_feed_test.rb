@@ -14,11 +14,10 @@ class Api::ListsFeedTest < ActionDispatch::IntegrationTest
 
     assert_response :ok
 
-    params = response_json
-    assert_not_nil params[:feed]
-    assert_kind_of Array, params[:feed]
+    assert_not_nil response_json[:feed]
+    assert_kind_of Array, response_json[:feed]
 
-    params[:feed].each do |micropost|
+    response_json[:feed].each do |micropost|
       %i(content user_id created_at updated_at picture).each do |element|
         assert_not_nil micropost[element]
       end

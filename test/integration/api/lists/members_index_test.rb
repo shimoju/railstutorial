@@ -13,8 +13,7 @@ class Api::Lists::MembersIndexTest < ActionDispatch::IntegrationTest
 
     assert_response :ok
 
-    params = response_json
-    params[:members].each do |user|
+    response_json[:members].each do |user|
       %i(id name email).each do |element|
         assert_not_nil micropost[element]
       end
