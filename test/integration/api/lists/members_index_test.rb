@@ -15,7 +15,7 @@ class Api::Lists::MembersIndexTest < ActionDispatch::IntegrationTest
 
     response_json[:members].each do |user|
       %i(id name email).each do |element|
-        assert_not_nil micropost[element]
+        assert_not_nil user[element]
       end
     end
   end
