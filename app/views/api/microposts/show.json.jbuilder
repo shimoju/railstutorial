@@ -1,3 +1,3 @@
 json.micropost do
-  json.extract! @micropost
+  json.merge! @micropost.attributes
 end

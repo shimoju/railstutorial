@@ -3,7 +3,7 @@ class Api::MicropostsController < Api::ApplicationController
   before_action :correct_user, only: :destroy
 
   def show
-    @micropost = Micropost.find_by(id: params[:id])
+    @micropost = Micropost.find(params[:id])
   end
 
   def create
