@@ -8,7 +8,7 @@ class Micropost < ActiveRecord::Base
 
   DEFAULT_COUNT = 30 # micropost一覧はデフォルトでは30件とってくる
 
-  def self.restrict count: DEFAULT_COUNT, since_id: nil, max_id: nil
+  def self.restrict(count: DEFAULT_COUNT, since_id: nil, max_id: nil)
     result = self # これにメソッドチェーンでクエリをつけていく
 
     unless since_id.nil?
