@@ -22,7 +22,7 @@ class Api::ListsFeedTest < ActionDispatch::IntegrationTest
         assert_not_nil micropost[element]
       end
     end
-		assert_equal 30, response_json[:feed].count
+    assert_equal 30, response_json[:feed].count
   end
 	
   test "feed取得(最新35件)" do
