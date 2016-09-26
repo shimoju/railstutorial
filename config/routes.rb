@@ -32,13 +32,15 @@ Rails.application.routes.draw do
   namespace :api, {format: 'json'} do
     resources :users do
       get :microposts
+
     end
     post 'auth' => 'sessions#create'
     resources :microposts, only: [:create, :destroy]
     get 'feed' => 'users#feed'
     resources :relationships, only: [:create, :destroy]
+    get 'lists' => 'users#lists'
 
-    resources :lists do
+    resources :lists, only: [:create, :destroy, :update, :show] do
       resources :members, only: [:create, :destroy, :index], module: :lists
       member do 
         get :feed
