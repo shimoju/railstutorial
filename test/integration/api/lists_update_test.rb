@@ -14,7 +14,7 @@ class Api::ListsUpdateTest < ActionDispatch::IntegrationTest
 
   test "自分のリスト名を変更" do
 
-    list_name = "enginner"
+    list_name = "engineer"
     patch api_list_path(@list), {list: {name: list_name}}, @correct_headers
     
     assert_response :ok
@@ -32,7 +32,7 @@ class Api::ListsUpdateTest < ActionDispatch::IntegrationTest
   end
 
   test "他人のリスト名を変更" do
-    list_name = "enginner"
+    list_name = "engineer"
     patch api_list_path(@list), {list: {name: list_name}}, @wrong_headers
 
     assert_response :forbidden
