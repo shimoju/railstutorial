@@ -48,11 +48,15 @@ class Api::UsersController < Api::ApplicationController
   end
 
   def following
-    render nothing: true, status: :ok
+    @user = User.find(params[:user_id])
+    @users = @user.following.paginate(page: params[:page])
+    render 'following', status: :ok
   end
 
   def followers
-    render nothing: true, status: :ok
+    @user = User.find(params[:user_id])
+    @users = @user.followers.paginate(page: params[:page])
+    render 'followers', status: :ok
   end
 
   def microposts
