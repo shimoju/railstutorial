@@ -6,6 +6,11 @@ class Api::MicropostsControllerTest < ActionController::TestCase
     @micropost = microposts(:orange)
   end
 
+  test "マイクロポストの閲覧(認証なし)" do
+    get :show, format: :json, id: @micropost.id
+    assert_response :unauthorized
+  end
+
   test "マイクロポストの投稿(認証なし)" do
     assert_no_difference "Micropost.count" do
       post :create, format: :json, micropost: { content: "ogidow"}

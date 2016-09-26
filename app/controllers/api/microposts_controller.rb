@@ -1,5 +1,5 @@
 class Api::MicropostsController < Api::ApplicationController
-  before_action :check_auth_token, only: [:create, :destroy]
+  before_action :check_auth_token, only: [:create, :destroy, :show]
   before_action :correct_user, only: :destroy
 
   def show
