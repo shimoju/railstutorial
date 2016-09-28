@@ -16,7 +16,5 @@ class Api::UsersMeTest < ActionDispatch::IntegrationTest
 
     assert_equal @user.following.count, response_json[:user][:following_count]
     assert_equal @user.followers.count, response_json[:user][:followers_count]
-
   end
-
 end
