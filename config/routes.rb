@@ -39,6 +39,7 @@ Rails.application.routes.draw do
     get 'feed' => 'users#feed'
     resources :relationships, only: [:create, :destroy]
     get 'lists' => 'users#lists'
+    get :me, path: "users/me", controller: :users
 
     resources :lists, only: [:create, :destroy, :update, :show] do
       resources :members, only: [:create, :destroy, :index], module: :lists
