@@ -33,6 +33,7 @@ Rails.application.routes.draw do
     resources :users do
       get :microposts
       get :following, :followers
+      get :me, on: :collection
     end
     post 'auth' => 'sessions#create'
     resources :microposts, only: [:create, :destroy, :show]

@@ -84,6 +84,11 @@ class Api::UsersController < Api::ApplicationController
     render status: :ok
   end
 
+  def me
+    @user = current_user
+    render 'show', status: :ok
+  end
+
   private
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
