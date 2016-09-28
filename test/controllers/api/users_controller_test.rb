@@ -82,4 +82,9 @@ class Api::UsersControllerTest < ActionController::TestCase
     get :followers, format: :json, user_id: @user
     assert_response :unauthorized
   end
+
+  test "自分の情報を取得(認証なし)" do
+    get :me, format: :json
+    assert_response :unauthorized
+  end
 end
