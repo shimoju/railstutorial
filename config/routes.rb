@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 
   #json api
   namespace :api, {format: 'json'} do
+    get 'users/me' => "users#me"
     resources :users do
       get :microposts
       get :following, :followers
@@ -39,7 +40,6 @@ Rails.application.routes.draw do
     get 'feed' => 'users#feed'
     resources :relationships, only: [:create, :destroy]
     get 'lists' => 'users#lists'
-    get :me, path: "users/me", controller: :users
 
     resources :lists, only: [:create, :destroy, :update, :show] do
       resources :members, only: [:create, :destroy, :index], module: :lists
