@@ -8,7 +8,7 @@ class Api::UsersMeTest < ActionDispatch::IntegrationTest
   end
 
   test "自分の情報を取得" do
-    get api_users_me_path, {}, @headers
+    get me_api_users_path, {}, @headers
     assert_response :ok
 
     assert_equal @user[:name], response_json[:user][:name]
