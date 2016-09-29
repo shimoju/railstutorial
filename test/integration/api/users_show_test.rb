@@ -20,6 +20,7 @@ class Api::UsersShowTest < ActionDispatch::IntegrationTest
 
     assert_equal @active_user.following.count, response_json[:user][:following_count]
     assert_equal @active_user.followers.count, response_json[:user][:followers_count]
+    assert_equal @active_user.microposts.count, response_json[:user][:microposts_count]
   end
 
   test "non_activeなユーザ情報取得" do
