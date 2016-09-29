@@ -10,7 +10,6 @@ class Api::UsersController < Api::ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @microposts = @user.microposts.paginate(page: params[:page])
 
     render nothing: true, status: :forbidden unless @user.activated?
   end
