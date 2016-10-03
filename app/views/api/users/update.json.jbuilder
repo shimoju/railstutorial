@@ -1,3 +1,3 @@
 json.user do
-  json.partial! "user", user: @user
+  json.partial! "user_with_email", user: @user
 end
