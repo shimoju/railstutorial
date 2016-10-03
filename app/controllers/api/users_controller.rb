@@ -86,7 +86,7 @@ class Api::UsersController < Api::ApplicationController
 
   def me
     @user = current_user
-    render 'me', status: :ok
+    render status: :ok
   end
 
   private
