@@ -5,7 +5,7 @@ class Api::UsersShowTest < ActionDispatch::IntegrationTest
     @user = users(:michael)
     @active_user = users(:archer)
     @non_active_user = users(:ogido)
-    
+
     token = @user.generate_jwt
     @headers = {"Authorization" => "Bearer #{token}"}
   end
@@ -16,7 +16,8 @@ class Api::UsersShowTest < ActionDispatch::IntegrationTest
 
     assert_not_nil response_json[:user]
     assert_equal @active_user[:name], response_json[:user][:name]
-    assert_equal @active_user[:email], response_json[:user][:email]
+    # 他人のメールアドレスを見れないようにするため、showではメールアドレスを返さない
+    assert_nil response_json[:user][:email]
 
     assert_equal @active_user.following.count, response_json[:user][:following_count]
     assert_equal @active_user.followers.count, response_json[:user][:followers_count]
