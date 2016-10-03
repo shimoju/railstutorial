@@ -1,6 +1,8 @@
 json.following do
   json.count @user.following.count
   json.users do
-    json.array! @users, :id, :name, :email
+    json.array!(@users) do |user|
+      json.partial! "user", user: user
+    end
   end
 end

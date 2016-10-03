@@ -59,7 +59,8 @@ class Api::FollowingTest < ActionDispatch::IntegrationTest
     following = response_json[:following]
     assert_equal following[:count], @user.following.count
     following[:users].each do |user|
-      %i(id name email).each do |element|
+      assert_nil user[:email]
+      %i(id name).each do |element|
         assert_not_nil user[element]
       end
     end
@@ -72,7 +73,8 @@ class Api::FollowingTest < ActionDispatch::IntegrationTest
     followers = response_json[:followers]
     assert_equal followers[:count], @user.followers.count
     followers[:users].each do |user|
-      %i(id name email).each do |element|
+      assert_nil user[:email]
+      %i(id name).each do |element|
         assert_not_nil user[element]
       end
     end
