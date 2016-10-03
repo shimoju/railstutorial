@@ -32,7 +32,8 @@ class Api::UsersController < Api::ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      render status: :ok
+      # メールアドレスも返すようにする
+      render 'me', status: :ok
     else
       render nothing: true, status: :unprocessable_entity
     end
