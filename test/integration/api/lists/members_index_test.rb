@@ -14,7 +14,7 @@ class Api::Lists::MembersIndexTest < ActionDispatch::IntegrationTest
     assert_response :ok
 
     response_json[:members].each do |user|
-      %i(id name email).each do |element|
+      %i(id name icon_url).each do |element|
         assert_not_nil user[element]
       end
     end
