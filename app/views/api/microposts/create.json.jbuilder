@@ -1,3 +1,4 @@
+json.message "Created"
 json.micropost do
-  json.extract! @micropost, :id, :content, :picture, :created_at
+  json.partial! "micropost", micropost: @micropost
 end
