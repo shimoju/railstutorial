@@ -18,13 +18,13 @@ class Api::ListsFeedTest < ActionDispatch::IntegrationTest
     assert_kind_of Array, response_json[:feed]
 
     response_json[:feed].each do |micropost|
-      %i(content user_id created_at updated_at picture).each do |element|
+      %i(content user_id created_at).each do |element|
         assert_not_nil micropost[element]
       end
     end
     assert_equal 30, response_json[:feed].count
   end
-	
+
   test "feed取得(最新35件)" do
     get feed_api_list_path(@list), {request_microposts: {count: 35}}, @headers
     assert_response :success

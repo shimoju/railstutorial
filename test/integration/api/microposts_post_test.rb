@@ -19,8 +19,9 @@ class Api::MicropostsPostTest < ActionDispatch::IntegrationTest
     assert_response :created
     assert assigns(:micropost).picture?
 
-    params = response_json
-    assert_equal params[:micropost][:content], content
+    micropost = response_json[:micropost]
+    assert_equal micropost[:content], content
+    assert_not_empty micropost[:picture]
   end
 
   test "空のマイクロポストの投稿(認証あり)" do

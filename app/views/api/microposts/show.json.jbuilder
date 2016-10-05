@@ -1,3 +1,3 @@
 json.micropost do
-  json.merge! @micropost.attributes
+  json.partial! "micropost", micropost: @micropost
 end
