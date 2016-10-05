@@ -20,7 +20,7 @@ class Api::MicropostsShowTest < ActionDispatch::IntegrationTest
     assert_equal @micropost.id,        response_micropost[:id]
     assert_equal @micropost.content,   response_micropost[:content]
     assert_equal @micropost.user_id,   response_micropost[:user_id]
-    assert_equal @micropost[:picture], response_micropost[:picture]
+    assert_equal @micropost.picture.url, response_micropost[:picture]
     # 時間の形式がDBと出力jsonで違うので合わせる
     assert_equal @micropost.created_at.xmlschema(3), response_micropost[:created_at]
   end
