@@ -5,7 +5,7 @@ class Api::UserMicropostsTest< ActionDispatch::IntegrationTest
     @user = users(:michael)
     @active_user = users(:archer)
     @non_active_user = users(:ogido)
-    
+
     token = @user.generate_jwt
     @headers = {"Authorization" => "Bearer #{token}"}
   end
@@ -20,7 +20,7 @@ class Api::UserMicropostsTest< ActionDispatch::IntegrationTest
 
     # microposts配列の中身に値漏れがないかチェック
     params[:microposts].each do |micropost|
-      %i(content user_id created_at updated_at picture).each do |element|
+      %i(content user_id created_at).each do |element|
         assert_not_nil micropost[element]
       end
 
