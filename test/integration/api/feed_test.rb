@@ -3,7 +3,7 @@ require 'test_helper'
 class Api::FeedTest< ActionDispatch::IntegrationTest
   def setup
     @user = users(:michael)
-    
+
     token = @user.generate_jwt
     @headers = {"Authorization" => "Bearer #{token}"}
   end
@@ -17,7 +17,7 @@ class Api::FeedTest< ActionDispatch::IntegrationTest
 
     # feed配列の中身に値漏れがないかチェック
     response_json[:feed].each do |micropost|
-      %i(content user_id created_at updated_at picture).each do |element|
+      %i(content user_id created_at).each do |element|
         assert_not_nil micropost[element]
       end
     end
