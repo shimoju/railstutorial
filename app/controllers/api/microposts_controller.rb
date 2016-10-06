@@ -22,7 +22,7 @@ class Api::MicropostsController < Api::ApplicationController
   def destroy
     micropost = Micropost.find_by(id: params[:id])
     micropost.destroy
-    render nothing: true, status: :ok
+    render json: "{}", status: :ok
   end
 
   private
@@ -32,6 +32,6 @@ class Api::MicropostsController < Api::ApplicationController
 
     def correct_user
       micropost = current_user.microposts.find_by(id: params[:id])
-      render nothing: true, status: :forbidden and return if micropost.nil?
+      render json: "{}", status: :forbidden and return if micropost.nil?
     end
 end

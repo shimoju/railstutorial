@@ -9,7 +9,7 @@ class Api::Lists::MembersController < Api::ApplicationController
   def create
     list = List.find_by(id: params[:list_id])
     @user = User.find_by(id: params[:user_id])
-    render nothing: true, status: :unprocessable_entity and return if list.nil? || @user.nil?
+    render json: "{}", status: :unprocessable_entity and return if list.nil? || @user.nil?
     member = list.list_members.build(user_id: @user.id)
 
     if member.save
@@ -25,18 +25,18 @@ class Api::Lists::MembersController < Api::ApplicationController
 
   def destroy
     list = List.find_by(id: params[:list_id])
-    render nothing: true, status: :unprocessable_entity and return if list.nil?
+    render json: "{}", status: :unprocessable_entity and return if list.nil?
     list_member = list.list_members.find_by(user_id: params[:id])
-    render nothing: true, status: :unprocessable_entity and return if list_member.nil?
+    render json: "{}", status: :unprocessable_entity and return if list_member.nil?
 
     list_member.destroy
-    render nothing: true, status: :ok
+    render json: "{}", status: :ok
   end
   
   private
   def correct_user
     list = List.find_by(id: params[:list_id])
-    render nothing: true, status: :forbidden and return unless current_user.lists.include?(list)
+    render json: "{}", status: :forbidden and return unless current_user.lists.include?(list)
   end
 
 end
