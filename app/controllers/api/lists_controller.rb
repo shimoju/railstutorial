@@ -24,14 +24,14 @@ class Api::ListsController < Api::ApplicationController
     if @list.update_attributes(list_params)
       render status: :ok
     else
-      render nothing: true, status: :unprocessable_entity
+      render json: "{}", status: :unprocessable_entity
     end
   end
 
   def destroy
     list = List.find(params[:id])
     list.destroy
-    render nothing: true, status: :ok
+    render json: "{}", status: :ok
   end
 
   def feed
@@ -49,7 +49,7 @@ class Api::ListsController < Api::ApplicationController
 
   def correct_user
     list = current_user.lists.find_by(id: params[:id])
-    render nothing: true, status: :forbidden and return if list.nil?
+    render json: "{}", status: :forbidden and return if list.nil?
   end
 
   def request_microposts_params

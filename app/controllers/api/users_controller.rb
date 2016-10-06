@@ -11,7 +11,7 @@ class Api::UsersController < Api::ApplicationController
   def show
     @user = User.find(params[:id])
 
-    render nothing: true, status: :forbidden unless @user.activated?
+    render json: "{}", status: :forbidden unless @user.activated?
   end
 
   def create
@@ -34,16 +34,16 @@ class Api::UsersController < Api::ApplicationController
     if @user.update_attributes(user_params)
       render status: :ok
     else
-      render nothing: true, status: :unprocessable_entity
+      render json: "{}", status: :unprocessable_entity
     end
   end
 
   def destroy
     user = User.find_by(id: params[:id])
-    render nothing: true, status: :not_found and return if user.nil?
+    render json: "{}", status: :not_found and return if user.nil?
 
     user.destroy
-    render nothing: true, status: :ok
+    render json: "{}", status: :ok
   end
 
   def following
@@ -61,7 +61,7 @@ class Api::UsersController < Api::ApplicationController
   def microposts
     @user = User.find(params[:user_id])
 
-    render nothing: true, status: :forbidden and return unless @user.activated?
+    render json: "{}", status: :forbidden and return unless @user.activated?
 
     @microposts = @user.microposts.restrict(request_microposts_params.to_h.symbolize_keys)
 
@@ -70,7 +70,7 @@ class Api::UsersController < Api::ApplicationController
 
   def feed
     @user = current_user
-    render nothing: true, status: :forbidden and return unless @user.activated?
+    render json: "{}", status: :forbidden and return unless @user.activated?
     @feed = @user.feed.restrict(request_microposts_params.to_h.symbolize_keys)
 
     render 'feed', status: :ok
@@ -78,7 +78,7 @@ class Api::UsersController < Api::ApplicationController
 
   def lists
     @user = current_user
-    render nothing: true, status: :forbidden and return unless @user.activated?
+    render json: "{}", status: :forbidden and return unless @user.activated?
     @lists = @user.lists.paginate(page: params[:page])
     render status: :ok
   end
@@ -99,6 +99,6 @@ class Api::UsersController < Api::ApplicationController
 
     def correct_user
       user = User.find(params[:id])
-      render nothing: true, status: :forbidden and return unless user == current_user
+      render json: "{}", status: :forbidden and return unless user == current_user
     end
 end

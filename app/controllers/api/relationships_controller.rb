@@ -3,11 +3,11 @@ class Api::RelationshipsController < Api::ApplicationController
 
   def create
     @user = User.find_by(id: relationship_params[:followed_id])
-    render nothing: true, status: :unprocessable_entity and return if @user.nil?
+    render json: "{}", status: :unprocessable_entity and return if @user.nil?
 
     @follow = current_user.follow(@user)
     if @follow.persisted?
-      render nothing: true, status: :created
+      render json: "{}", status: :created
     else
       build_json = Jbuilder.encode do |json|
         json.message "Validation Failed"
@@ -19,10 +19,10 @@ class Api::RelationshipsController < Api::ApplicationController
 
   def destroy
     @relation = Relationship.find_by(id: params[:id])
-    render nothing: true, status: :unprocessable_entity and return if @relation.nil?
+    render json: "{}", status: :unprocessable_entity and return if @relation.nil?
 
     current_user.unfollow(@relation.followed)
-    render nothing: true, status: :ok
+    render json: "{}", status: :ok
   end
 
   private
