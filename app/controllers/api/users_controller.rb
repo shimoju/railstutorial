@@ -48,13 +48,13 @@ class Api::UsersController < Api::ApplicationController
 
   def following
     @user = User.find(params[:user_id])
-    @users = @user.following.paginate(page: params[:page])
+    @users = @user.following
     render 'following', status: :ok
   end
 
   def followers
     @user = User.find(params[:user_id])
-    @users = @user.followers.paginate(page: params[:page])
+    @users = @user.followers
     render 'followers', status: :ok
   end
 
