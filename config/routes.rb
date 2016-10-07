@@ -39,6 +39,8 @@ Rails.application.routes.draw do
     resources :microposts, only: [:create, :destroy, :show]
     get 'feed' => 'users#feed'
     resources :relationships, only: [:create, :destroy]
+    delete 'relationship' => 'relationship#destroy_by_userid'
+
     get 'lists' => 'users#lists'
 
     resources :lists, only: [:create, :destroy, :update, :show] do
