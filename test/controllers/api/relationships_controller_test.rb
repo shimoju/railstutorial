@@ -14,4 +14,11 @@ class Api::RelationshipsControllerTest < ActionController::TestCase
     end
     assert_response :unauthorized
   end
+
+  test "Relationshipの削除には認証が必要(userId)" do
+    assert_no_difference 'Relationship.count' do
+      delete :destroy_by_userid, format: :json, relationship: { followed_id: users(:archer).id}
+    end
+    assert_response :unauthorized
+  end
 end

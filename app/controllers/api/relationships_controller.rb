@@ -25,6 +25,14 @@ class Api::RelationshipsController < Api::ApplicationController
     render json: "{}", status: :ok
   end
 
+  def destroy_by_userid
+    @relation = Relationship.find_by(followed_id: relationship_params[:followed_id])
+    render json: "{}", status: :unprocessable_entity and return if @relation.nil?
+
+    current_user.unfollow(@relation.followed)
+    render json: "{}", status: :ok
+  end
+
   private
     def relationship_params
       params.require(:relationship).permit(:followed_id)
