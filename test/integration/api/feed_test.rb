@@ -17,7 +17,7 @@ class Api::FeedTest< ActionDispatch::IntegrationTest
 
     # feed配列の中身に値漏れがないかチェック
     response_json[:feed].each do |micropost|
-      %i(content user_id created_at).each do |element|
+      %i(content user_id created_at user).each do |element|
         assert_not_nil micropost[element]
       end
     end

@@ -23,5 +23,7 @@ class Api::MicropostsShowTest < ActionDispatch::IntegrationTest
     assert_equal @micropost.picture.url, response_micropost[:picture]
     # 時間の形式がDBと出力jsonで違うので合わせる
     assert_equal @micropost.created_at.xmlschema(3), response_micropost[:created_at]
+    # ユーザー情報が含まれているか
+    assert_equal @micropost.user.name, response_micropost[:user][:name]
   end
 end
