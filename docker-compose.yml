@@ -1,0 +1,25 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+    environment:
+      RAILS_ENV: development
+      DB_HOST: db
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+      - /app/vendor
+      - /app/node_modules
+    depends_on:
+      - db
+
+  db:
+    image: postgres:9.6
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+volumes:
+  postgres:
+    driver: local
