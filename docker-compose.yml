@@ -10,7 +10,7 @@ services:
       - 3000:3000
     volumes:
       - .:/app
-      - /app/vendor/bundle
+      - /usr/local/bundle
       - /app/node_modules
     depends_on:
       - db
