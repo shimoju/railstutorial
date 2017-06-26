@@ -6,11 +6,12 @@ ENV LANG=C.UTF-8 \
 
 RUN apt-get update -qq && apt-get install -qq curl \
   && curl -fsSL https://deb.nodesource.com/setup_8.x | bash - \
-  && apt-get install -qq \
+  && apt-get install -qq --no-install-recommends \
     build-essential \
     nodejs \
     libpq-dev \
-    postgresql-client
+    postgresql-client \
+  && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
