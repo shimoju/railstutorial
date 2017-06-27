@@ -34,6 +34,7 @@ group :development do
   gem 'capistrano',       '3.6.1'
   gem 'capistrano-rails'
   gem 'capistrano3-unicorn'
+  gem 'guard-minitest',     '2.3.1'
   gem 'terminal-notifier', require: false
   gem 'terminal-notifier-guard', require: false
 end
@@ -41,7 +42,6 @@ end
 group :test do
   gem 'minitest-reporters', '1.0.5'
   gem 'mini_backtrace',     '0.1.3'
-  gem 'guard-minitest',     '2.3.1'
 end
 
 group :production do
